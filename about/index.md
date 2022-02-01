@@ -16,9 +16,9 @@ After graduation, I am expected as a security developer or researcher member of 
 
 <h2 align="left">⚡ Interests</h2>  
 
-> - Security
-> - A.I.
-> - Cloud Engineering
+- Security
+- A.I.
+- Cloud Engineering
 
 ## 📚 Publication & Award
 
