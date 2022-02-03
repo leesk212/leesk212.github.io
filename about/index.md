@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 📣 About Me 📣
+title: About Me
 tags: [about, Jekyll, theme, moon]
 date: 2022-02-01
 comments: false
@@ -14,13 +14,13 @@ After graduation, I am expected as a security developer or researcher member of 
 
 
 
-<h2 align="left">⚡ Interests</h2>  
+<h2 align="left"> Interests</h2>  
 
 - Security
 - A.I.
 - Cloud Engineering
 
-## 📚 Publication & Award
+## Publication & Award
 
 ### Conference
 #### Scopus
@@ -46,7 +46,7 @@ After graduation, I am expected as a security developer or researcher member of 
 
 
  
-## 🌱  Projects
+##  Projects
 
 > * 광운대학교 운동 동작 분류 AI 경진대회 
 >> - Program: Dacon 
@@ -91,7 +91,7 @@ After graduation, I am expected as a security developer or researcher member of 
 >> - 2020/07/03 ~ 2020/08/25
 
 
-## 🌱  Educational History
+##  Educational History
 
 >   
 > * Bachelor 
