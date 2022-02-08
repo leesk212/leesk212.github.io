@@ -25,4 +25,4 @@ tags: linux cryptojacking crypto
 
 ### Installing XMing
 
-{% inlcude test.html id="YWgj1fPH3w" %}
+{% include test.html id="YWgj1fPH3w" %}
