@@ -1,7 +1,7 @@
 ---
 toc: true
 tags: HPC MPI 
-title: [HPC]What is MPI
+title: "[HPC]What is MPI"
 ---
 
 ## MPI란?
