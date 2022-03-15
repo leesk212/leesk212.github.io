@@ -1,5 +1,5 @@
 ---
-tags: grub, linux
+tags: grub linux
 toc: true
 ---
 
