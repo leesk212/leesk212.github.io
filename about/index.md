@@ -33,6 +33,9 @@ After graduation, I am expected as a security developer or researcher member of 
 * [[Link](https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE10591570&mark=0&useDate=&bookmarkCnt=0&ipRange=N&accessgl=Y&language=ko_KR)] 백재우, __이석민__, 이영준, 이호찬, 박철수 “Automatic Sleep Stage Classifier using Inception Network and Recurrent Neural Network based on EEG single channel”, 대한전자공학회 하계학술대회 (IEIE), 제주, 2021.06
 
 ### Journal
+#### SCI
+* [[Link](https://ieeexplore.ieee.org/abstract/document/9745092/authors#authors)] Jaewoo Baek; Choongseop Lee; Hyunsoo Yu; Suwhan Baek; __Seokmin Lee__; Seungmin Leec; Cheolsoo Park "Automatic Sleep Scoring Using Intrinsic Mode based on Interpretable Deep Neural Networks", IEEE Access, 2022 
+
 #### LNCS
 * [[Link](https://link.springer.com/chapter/10.1007/978-3-030-89432-0_18)] __Seokmin Lee__, Taehun Kim, and Youngjoo Shin. "Quantitative Analysis on Attack Capacity in Meltdown-Type Attacks." International Conference on Information Security Applications. Springer, Cham, 2021.
 
