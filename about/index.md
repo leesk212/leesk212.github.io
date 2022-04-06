@@ -44,7 +44,7 @@ After graduation, I am expected as a security developer or researcher member of 
 * (출원번호: 제 C-2020-041988 호) __이석민__, 안유림, 신영주, "공격 탐지 알림 프로그램". 한국 저작권 위원회, 2020.11  
 
 ### Award
-* KSC2021 우수발표논문상 수상 (2022년 2월 / 시상기관: 한국정보과학회[:Korea Institute of Information Scientists and Engineers])
+* KSC2021 우수발표논문상 수상 (2022년 2월 / 시상기관: 한국정보과학회[Korea Institute of Information Scientists and Engineers])
 * 2021-2학기 SW능력우수장핵생 선정 (2021년 12월 / 시상기관: 광운대학교 SW중심대학사업단)
 * 2021 SW인재스퀘어 학생포트폴리오 경진대회 대상 수상 (2021년 10월 / 시상기관: 광운대학교 SW중심대학사업단)
 * 제 5회 산학연계 SW 프로젝트 전시회 대상(총장상) (President's Award) 수상 (2021년 6월 / 시상기관: 광운대학교 SW중심대학사업단)
