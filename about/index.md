@@ -34,7 +34,7 @@ After graduation, I am expected as a security developer or researcher member of 
 
 ### Journal
 #### SCI
-* [[Link](https://ieeexplore.ieee.org/abstract/document/9745092/authors#authors)] Jaewoo Baek; Choongseop Lee; Hyunsoo Yu; Suwhan Baek; __Seokmin Lee__; Seungmin Leec; Cheolsoo Park "Automatic Sleep Scoring Using Intrinsic Mode based on Interpretable Deep Neural Networks", IEEE Access, 2022 
+* [[Link](https://ieeexplore.ieee.org/abstract/document/9745092/authors#authors)] Jaewoo Baek, Choongseop Lee, Hyunsoo Yu, Suwhan Baek, __Seokmin Lee__, Seungmin Leec, Cheolsoo Park "Automatic Sleep Scoring Using Intrinsic Mode based on Interpretable Deep Neural Networks", IEEE Access, 2022 
 
 #### LNCS
 * [[Link](https://link.springer.com/chapter/10.1007/978-3-030-89432-0_18)] __Seokmin Lee__, Taehun Kim, and Youngjoo Shin. "Quantitative Analysis on Attack Capacity in Meltdown-Type Attacks." International Conference on Information Security Applications. Springer, Cham, 2021.
