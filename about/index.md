@@ -29,7 +29,7 @@ After graduation, I am expected as a security developer or researcher member of 
 
 #### Domestic Conference
 * [[Link](https://www.manuscriptlink.com/society/kiisc/conference/ciscw2022)] __이석민__,  신영주 "Design of High-performance Cryptanalysis System based on GPUDirect RDMA", 한국정보보호학회 하계학술대회 (CISC-S), 부산, 2022.06
-* [[Link]([http://www.kiise.or.kr/conference/KSC/2021/](https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11035871))] __이석민__, 노승일, 김태훈, 신영주 "Empirical study of usage of SMTP TLS Reporting", 2021 한국소프트웨어종합학술대회 (KSC2021), 강원, 2021.11
+* [[Link](https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11035871)] __이석민__, 노승일, 김태훈, 신영주 "Empirical study of usage of SMTP TLS Reporting", 2021 한국소프트웨어종합학술대회 (KSC2021), 강원, 2021.11
 * [[Link](https://www.manuscriptlink.com/society/kiisc/conference/ciscw2021)] 노승일, 김재한, __이석민__, 강영신, 박철수, 신영주 "Analysis of Privacy Leakage Vulnerability in ECG-based Authentication Protocols", 한국정보보호학회 동계학술대회 (CISC-W), 경기, 2021.11
 * [[Link](https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE10591570&mark=0&useDate=&bookmarkCnt=0&ipRange=N&accessgl=Y&language=ko_KR)] 백재우, __이석민__, 이영준, 이호찬, 박철수 “Automatic Sleep Stage Classifier using Inception Network and Recurrent Neural Network based on EEG single channel”, 대한전자공학회 하계학술대회 (IEIE), 제주, 2021.06
 
