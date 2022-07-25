@@ -25,7 +25,7 @@ After graduation, I am expected as a security developer or researcher member of 
 ### Conference
 
 #### Scopus
-* [[Link](https://www.manuscriptlink.com/society/kiisc/conference/wisa2021/accepted)] __Seokmin Lee__, Taehun Kim and Youngjoo Shin, "Quantitative Analysis on Attack Capacity in Meltdown-type Attacks," The 22nd World Conference on Information Security Applications (WISA), August, 11-13, 2021, Jeju, South Korea
+* [[Link](https://dl.acm.org/doi/abs/10.1007/978-3-030-89432-0_18)] __Seokmin Lee__, Taehun Kim and Youngjoo Shin, "Quantitative Analysis on Attack Capacity in Meltdown-type Attacks," The 22nd World Conference on Information Security Applications (WISA), August, 11-13, 2021, Jeju, South Korea
 
 #### Domestic Conference
 * [[Link](https://www.cisc.or.kr/)] __이석민__,  신영주 "Design of High-performance Cryptanalysis System based on GPUDirect RDMA", 한국정보보호학회 하계학술대회 (CISC-S), 부산, 2022.06
