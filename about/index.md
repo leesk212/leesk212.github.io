@@ -35,7 +35,7 @@ After graduation, I am expected as a security developer or researcher member of 
 
 ### Journal
 #### SCI
-* [Link]() Seungil Noh, Jaehan Kim, __Seokmin Lee__, Youngshin Kang, Cheolsoo Park, and Youngjoo Shin "Broken Heart : Privacy Leakage Analysis on ECG-based Authentication Schemes", Hindawi, 2022
+* [[Link]]() Seungil Noh, Jaehan Kim, __Seokmin Lee__, Youngshin Kang, Cheolsoo Park, and Youngjoo Shin "Broken Heart : Privacy Leakage Analysis on ECG-based Authentication Schemes", Hindawi, 2022
 * [[Link](https://ieeexplore.ieee.org/abstract/document/9745092/authors#authors)] Jaewoo Baek, Choongseop Lee, Hyunsoo Yu, Suwhan Baek, __Seokmin Lee__, Seungmin Leec, Cheolsoo Park "Automatic Sleep Scoring Using Intrinsic Mode based on Interpretable Deep Neural Networks", IEEE Access, 2022 
 
 #### LNCS
