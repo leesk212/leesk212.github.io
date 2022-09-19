@@ -101,7 +101,7 @@ After graduation, I am expected as a security developer or researcher member of 
 >> - 2020/07/03 ~ 2020/08/25
 
 
-##  Educational History
+##  Educational History  (until undergraduate student)
 
 >   
 > * Bachelor 
@@ -132,7 +132,7 @@ After graduation, I am expected as a security developer or researcher member of 
 >>>   * [(private)cross-site-scripting attack](https://github.com/leesk212/4_1/tree/main/ISA/Web-hacking/cross-site-scripting-attack)
 >>>   * [(private)metasploit](https://github.com/leesk212/4_1/tree/main/ISA/Web-hacking/metasploit)
 >> - 2016/03 ~   
-> * Program
+> * Program 
 >> - **BlackHat_2020**   
 >>    * [About A Complete Practical Approach to Malware Analysis and Memory Forensics](https://github.com/leesk212/BlackHat_2020)   
 >> - [**IDEC_2021**](https://github.com/leesk212/2021_IDEC)   
