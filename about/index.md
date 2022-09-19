@@ -22,39 +22,39 @@ After graduation, I am expected as a security developer or researcher member of 
 
 ## Publication & Award
 
-### Conference
+### [Conference]
 
-#### Scopus
+#### > Scopus 
 * [[Link](https://dl.acm.org/doi/abs/10.1007/978-3-030-89432-0_18)] __Seokmin Lee__, Taehun Kim and Youngjoo Shin, "Quantitative Analysis on Attack Capacity in Meltdown-type Attacks," The 22nd World Conference on Information Security Applications (WISA), August, 11-13, 2021, Jeju, South Korea
 
-#### Domestic Conference
+#### > Domestic Conference
 * [[Link](https://www.cisc.or.kr/)] __이석민__,  신영주 "Design of High-performance Cryptanalysis System based on GPUDirect RDMA", 한국정보보호학회 하계학술대회 (CISC-S), 부산, 2022.06
 * [[Link](https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11035871)] __이석민__, 노승일, 김태훈, 신영주 "Empirical study of usage of SMTP TLS Reporting", 2021 한국소프트웨어종합학술대회 (KSC2021), 강원, 2021.11
 * [[Link](https://www.manuscriptlink.com/society/kiisc/conference/ciscw2021)] 노승일, 김재한, __이석민__, 강영신, 박철수, 신영주 "Analysis of Privacy Leakage Vulnerability in ECG-based Authentication Protocols", 한국정보보호학회 동계학술대회 (CISC-W), 경기, 2021.11
 * [[Link](https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE10591570&mark=0&useDate=&bookmarkCnt=0&ipRange=N&accessgl=Y&language=ko_KR)] 백재우, __이석민__, 이영준, 이호찬, 박철수 “Automatic Sleep Stage Classifier using Inception Network and Recurrent Neural Network based on EEG single channel”, 대한전자공학회 하계학술대회 (IEIE), 제주, 2021.06
 
-### Journal
-#### SCI
+### [Journal]
+#### > SCI
 * [[Link]]() Seungil Noh, Jaehan Kim, __Seokmin Lee__, Youngshin Kang, Cheolsoo Park, and Youngjoo Shin "Broken Heart : Privacy Leakage Analysis on ECG-based Authentication Schemes", Hindawi, 2022
 * [[Link](https://ieeexplore.ieee.org/abstract/document/9745092/authors#authors)] Jaewoo Baek, Choongseop Lee, Hyunsoo Yu, Suwhan Baek, __Seokmin Lee__, Seungmin Leec, Cheolsoo Park "Automatic Sleep Scoring Using Intrinsic Mode based on Interpretable Deep Neural Networks", IEEE Access, 2022 
 
-#### LNCS
+#### > LNCS
 * [[Link](https://link.springer.com/chapter/10.1007/978-3-030-89432-0_18)] __Seokmin Lee__, Taehun Kim, and Youngjoo Shin. "Quantitative Analysis on Attack Capacity in Meltdown-Type Attacks." International Conference on Information Security Applications. Springer, Cham, 2021.
 
-### Software Copyright
+### [Software Copyright]
 * (출원번호: 제 C-2022-xxxxxx 호) __이석민__, 신영주, "Att-BLSTM을 활용한 PMC Counter 시계열 데이터 기반 이상 행위 탐지 소프트웨어", 한국 저작권 위원회, 2022.09 
 * (출원번호: 제 C-2022-xxxxxx 호) __이석민__, 신영주, "IoT 환경에서의 CHAM 암호 알고리즘 소프트웨어". 한국 저작권 위원회, 2022.09  
 * (출원번호: 제 C-2021-046905 호) __이석민__, 신영주, "Intel CPU 대상 Meltdown 유형 공격을 활용한 정량적 공격 수용력 측정 프로그램", 한국 저작권 위원회, 2021.11 
 * (출원번호: 제 C-2020-041988 호) __이석민__, 안유림, 신영주, "공격 탐지 알림 프로그램". 한국 저작권 위원회, 2020.11  
 
-### Award
+### [Award]
 * KSC2021 우수발표논문상 수상 (2022년 2월 / 시상기관: 한국정보과학회[Korea Institute of Information Scientists and Engineers])
 * 2021-2학기 SW능력우수장핵생 선정 (2021년 12월 / 시상기관: 광운대학교 SW중심대학사업단)
 * 2021 SW인재스퀘어 학생포트폴리오 경진대회 대상 수상 (2021년 10월 / 시상기관: 광운대학교 SW중심대학사업단)
 * 제 5회 산학연계 SW 프로젝트 전시회 대상(총장상) (President's Award) 수상 (2021년 6월 / 시상기관: 광운대학교 SW중심대학사업단)
 * 2017 SW Challenge 1st (2017년 7월 / 시상기관: Kwangwoon & Kookmin University)
 
-
+### [License and Certificate]
  
 ##  Projects (until undergraduate student)
 
