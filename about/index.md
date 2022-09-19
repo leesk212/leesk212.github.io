@@ -56,6 +56,9 @@ After graduation, I am expected as a security developer or researcher member of 
 
 ### [License and Certificate]
  
+![image](https://user-images.githubusercontent.com/67637935/191115668-79d8f741-fc8b-4b06-9f97-f13621439991.png)
+ 
+ 
 ##  Projects (until undergraduate student)
 
 > * 광운대학교 운동 동작 분류 AI 경진대회 
