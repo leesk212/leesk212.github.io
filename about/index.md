@@ -42,8 +42,8 @@ After graduation, I am expected as a security developer or researcher member of 
 * [[Link](https://link.springer.com/chapter/10.1007/978-3-030-89432-0_18)] __Seokmin Lee__, Taehun Kim, and Youngjoo Shin. "Quantitative Analysis on Attack Capacity in Meltdown-Type Attacks." International Conference on Information Security Applications. Springer, Cham, 2021.
 
 ### [Software Copyright]
-* (출원번호: 제 C-2022-xxxxxx 호) __이석민__, 신영주, "Att-BLSTM을 활용한 PMC Counter 시계열 데이터 기반 이상 행위 탐지 소프트웨어", 한국 저작권 위원회, 2022.09 
-* (출원번호: 제 C-2022-xxxxxx 호) __이석민__, 신영주, "IoT 환경에서의 CHAM 암호 알고리즘 소프트웨어". 한국 저작권 위원회, 2022.09  
+* (출원번호: 제 C-2022-042294 호) __이석민__, 신영주, "Att-BLSTM을 활용한 PMC Counter 시계열 데이터 기반 이상 행위 탐지 소프트웨어", 한국 저작권 위원회, 2022.09 
+* (출원번호: 제 C-2022-042295 호) __이석민__, 신영주, "IoT 환경에서의 CHAM 암호 알고리즘 소프트웨어". 한국 저작권 위원회, 2022.09  
 * (출원번호: 제 C-2021-046905 호) __이석민__, 신영주, "Intel CPU 대상 Meltdown 유형 공격을 활용한 정량적 공격 수용력 측정 프로그램", 한국 저작권 위원회, 2021.11 
 * (출원번호: 제 C-2020-041988 호) __이석민__, 안유림, 신영주, "공격 탐지 알림 프로그램". 한국 저작권 위원회, 2020.11  
 
