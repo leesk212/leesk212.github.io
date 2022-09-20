@@ -47,6 +47,10 @@ After graduation, I am expected as a security developer or researcher member of 
 * (출원번호: 제 C-2021-046905 호) __이석민__, 신영주, "Intel CPU 대상 Meltdown 유형 공격을 활용한 정량적 공격 수용력 측정 프로그램", 한국 저작권 위원회, 2021.11 
 * (출원번호: 제 C-2020-041988 호) __이석민__, 안유림, 신영주, "공격 탐지 알림 프로그램". 한국 저작권 위원회, 2020.11  
 
+### [Patent]
+* (Running 1)
+* (Running 2)
+
 ### [Award]
 * KSC2021 우수발표논문상 수상 (2022년 2월 / 시상기관: 한국정보과학회[Korea Institute of Information Scientists and Engineers])
 * 2021-2학기 SW능력우수장핵생 선정 (2021년 12월 / 시상기관: 광운대학교 SW중심대학사업단)
@@ -56,8 +60,8 @@ After graduation, I am expected as a security developer or researcher member of 
 
 ### [License and Certificate]
  
-![image](https://user-images.githubusercontent.com/67637935/191115668-79d8f741-fc8b-4b06-9f97-f13621439991.png)
- 
+ ![image](https://user-images.githubusercontent.com/67637935/191180025-c92c2ea0-c362-4d52-b883-0f905d406396.png)
+
  
 ##  Projects (until undergraduate student)
 
