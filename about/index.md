@@ -41,6 +41,10 @@ After graduation, I am expected as a security developer or researcher member of 
 #### > LNCS
 * [[Link](https://link.springer.com/chapter/10.1007/978-3-030-89432-0_18)] __Seokmin Lee__, Taehun Kim, and Youngjoo Shin. "Quantitative Analysis on Attack Capacity in Meltdown-Type Attacks." International Conference on Information Security Applications. Springer, Cham, 2021.
 
+#### > 
+* (Running 1)
+* (Running 2)
+
 ### [Patent]
 * (Running 1)
 * (Running 2)
