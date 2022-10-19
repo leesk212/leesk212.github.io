@@ -46,7 +46,7 @@ After graduation, I am expected as a security developer or researcher member of 
 * (Running 2)
 
 ### [Patent]
-* (출원 번호: 10-2022-0134022 ) __이석민__, 신영주 "전자 장치 및 그의 암호 분석 방법(ELECTRONIC APPARATUS AND CRYPTANALYSIS METHOD THEREOF)", 2022.10.18
+* (출원 번호: 10-2022-0134022 ) __이석민__, 신영주, "전자 장치 및 그의 암호 분석 방법(ELECTRONIC APPARATUS AND CRYPTANALYSIS METHOD THEREOF)", 2022.10.18
 * (Running 2)
 
 ### [Software Copyright]
