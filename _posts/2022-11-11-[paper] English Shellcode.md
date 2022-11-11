@@ -51,7 +51,7 @@ being exploited arise due to some level of neglect on the part of system and app
   * However, as expected, a number of techniques have been developed that circumvent these protective measures, or make their job far more difficult (e.g., polymorphism).
 * **Recently, it has been suggested that even polymorphic shellcode is constrained by an essential component: the decoder.**
   * **The argument is that the decoder is a necessary and executable companion to encoded shellcode, enabling the encoded portion of the payload to undergo an inverse transformation to its original and executable form.**
-  * **Since the decoder must be natively executable, the prevailing thought is that we can detect its presence assuming that this portion of the payload will bear some identifiable features not common to valid or non-executable data. **
+  * **Since the decoder must be natively executable, the prevailing thought is that we can detect its presence assuming that this portion of the payload will bear some identifiable features not common to valid or non-executable data.**
   * It is this assumption **that shellcode is fundamentally different in structure than non-executable payload data—that continues to drive some avenues of contemporary research** (e.g., [27, 16, 15, 26]).
 * By challenging the assumption that shellcode must conform to superficial and discernible representations, we question whether protective measures designed to assume otherwise are likely to succeed. 
   * **Specifically, we demonstrate a technique for automatically producing English Shellcode that is, transforming arbitrary shellcode into a representation that is statistically similar to English prose.**
