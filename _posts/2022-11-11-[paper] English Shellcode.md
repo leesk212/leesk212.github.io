@@ -89,7 +89,8 @@ being exploited arise due to some level of neglect on the part of system and app
   * Moreover, attacks are not constrained to this layout and so attempts at merely detecting this structure can be problematic; infact, identifying each component has its own unique set of challenges [1, 13], and it has been suggested that malicious polymorphic behavior cannot be modeled effectively [20]. 
   * In support of that argument, we provide a concrete instantiation that shows that the decoder can share the same properties as benign data.
 
-# Related Work (분류를 소개하고, 세부적인 관련 연구들을 소개한다-->괜찮은듯)
+# Related Work 
+(분류를 소개하고, 세부적인 관련 연구들을 소개한다-->괜찮은듯)
 * Three types of defensive approaches about code-injection attacks
   1. **Tools and techniques to both limit the spoils of exploitations and to prevent developers from writing vulnerable code.**
     * Examples of such approaches include automatic bounds protection for buffers [4] and static checking of format strings at compile-time, utilizing “safe” versions of system libraries, and address-space layout randomization [19], etc
@@ -107,3 +108,28 @@ sequences that fall between jump instructions, and find that payloads with lower
   * Our work supports their observations in that while today’s polymorphic engines do generate observable artifacts, these artifacts are not intrinsically symptomatic of polymorphic code.
   * **However, while they advise that modeling acceptable content or behavior may lead to a better long-term solution for preventing shellcode delivery, we argue that even modeling acceptable content will be rife with its own set of challenges, as exemplified by English shellcode.**
   * Specifically, by generating malicious code that draws from a language model built using only benign content, statistical measures of intent become less accurate and the signal-to-noise ratio between malicious code and valid network data declines.
+
+# Towards English shellcode
+* Shellcode, like other compiled code, is simply an ordered list of machine instructions. 
+  * At the lowest level of representation, each instruction is stored as a series of bytes signifying a pattern of signals that instruct the CPU to manipulate data as desired.
+  * Like machine instructions, non-executable data is represented in byte form.
+  * Coincidentally, some character strings from the ASCII character and native machine instructions have identical byte representations.
+  * Moreover, it is even possible to find examples of this phenomenon that parse as grammatically correct English sentences.
+    * For instance, ASCII representation of the phrase “Shake Shake Shake!” is byte-equivalent to the following sequence of Intel instructions: push %ebx; push "ake "; push %ebx; push "ake "; push %ebx; push "ake!".
+  * However, it is unlikely that one could construct meaningful code by simply concatenating English phrases that exhibit this property.
+  * Abiding by the rules of English grammar simply excludes the presence of many instructions and significantly limits the availability and placement of others.
+    * For example, add, mov, and call instructions cannot be constructed using this method.
+  * Therefore, while it may be possible to construct some instances of shellcode with coherent objectives in this manner, the versatility of this technique is severely restricted by its limitations.
+  * **Rather than find these instances, our goal is instead to develop an automated approach for transforming arbitrary shellcode into an English representation.**
+
+## High-level Overview
+* What follows is a brief description of the method we have developed for encoding arbitrary shellcode as English text.
+* This English shellcode is completely self-contained, i.e., it does not require an external loader, and executes as valid IA32 code. 
+*  The steps depicted in Figure 3 complement the brief overview of our approach presented below.
+![image](https://user-images.githubusercontent.com/67637935/201276307-ede8113a-42f1-4793-84ce-84b034e79d55.png)
+
+*  One can envision a typical usage scenario (see Figure 4) where the English shellcode (composed of a natively executable decoder and an encoded payload containing arbitrary shellcode) is first generated offline.
+
+![image](https://user-images.githubusercontent.com/67637935/201276365-a2b1c98d-cfd3-4e77-b48f-37e627d91ebd.png)
+
+*  Once the English shellcode is delivered to a vulnerable machine and its vulnerability is triggered, execution is redirected to the English shellcode, initiating the decoding process and launching the target shellcode contained in the payload.
