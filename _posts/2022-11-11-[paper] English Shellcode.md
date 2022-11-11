@@ -128,24 +128,31 @@ sequences that fall between jump instructions, and find that payloads with lower
 *  The steps depicted in Figure 3 complement the brief overview of our approach presented below.
 ![image](https://user-images.githubusercontent.com/67637935/201276307-ede8113a-42f1-4793-84ce-84b034e79d55.png)
 
-  1. English-Compatible Decoder
+  1. English-Compatible Decoder (영어호환 디코더)
      * Write a decoder that is capable of encoding generic payloads using only English-compatible instructions. 
+     > 영어 호환 명령어만 사용하여 일반 페이로드를 인코딩할 수 있는 디코더를 작성하십시오.
 
-
-  2. Language Model Generation
+  2. Language Model Generation (언어 모델 생성)
      * Generate and train a natural language model with a large and diverse corpus of English text. 
+     > 크고 다양한 영어 텍스트 말뭉치를 사용하여 자연어 모델을 생성하고 교육합니다.
 
-
-  3. Viterbi Search and Execution
+  3. Viterbi Search and Execution (비버티 검색과 실행)
      * Using Viterbi search, traverse the language model, executing and scoring each candidate decoder.
+     > Viterbi 검색을 사용하여 언어 모델을 탐색하고 각 후보 디코더를 실행하고 점수를 매깁니다
 
-
-  4. Encode Target Shellcode
+  4. Encode Target Shellcode (타겟 쉘코드를 인코딩합니다.)
      * Continue to traverse the language model, encoding the target shellcode as English. Upon delivery, this code will be decoded and executed. 
-
+     > 대상 셸 코드를 영어로 인코딩하여 언어 모델을 계속 탐색합니다. 전달 완료시 이 코드는 디코딩되어 실행됩니다.
 
 *  One can envision a typical usage scenario (see Figure 4) where the English shellcode (composed of a natively executable decoder and an encoded payload containing arbitrary shellcode) is first generated offline.
 
 ![image](https://user-images.githubusercontent.com/67637935/201276365-a2b1c98d-cfd3-4e77-b48f-37e627d91ebd.png)
 
-*  Once the English shellcode is delivered to a vulnerable machine and its vulnerability is triggered, execution is redirected to the English shellcode, initiating the decoding process and launching the target shellcode contained in the payload.
+*  **Once the English shellcode is delivered to a vulnerable machine and its vulnerability is triggered, execution is redirected to the English shellcode, initiating the decoding process and launching the target shellcode contained in the payload. (영어 쉘코드가 취약한 시스템에 전달되고 취약성이 트리거되면 실행이 영어 쉘코드로 리디렉션되어 디코딩 프로세스를 시작하고 페이로드에 포함된 대상 쉘코드를 시작합니다)**
+
+* First, a list of English-compatible instructions were compiled and categorized loosely by behavior, i.e., whether an instruction performs a jump, executes a boolean operation, or manipulates the stack.
+* Some excerpts from the list are shown in Figure 2. Using this list and its categorization to guide development, a decoder was written that is capable of encoding generic payloads using only instructions from our list. 
+
+![image](https://user-images.githubusercontent.com/67637935/201280360-da781859-bcc5-442e-bfd9-e70c2c2151ce.png)
+
+* This intermediate result is similar in spirit to the alphanumeric decoders, however, our decoder is further constrained by a guiding principle to avoid certain character patterns that might later make finding an English equivalent more difficult, e.g., the string of mostly capital letters that compose the PexAlphaNum and Alpha2 decoders depicted in Figure 1 would likely result in poor English shellcode.
