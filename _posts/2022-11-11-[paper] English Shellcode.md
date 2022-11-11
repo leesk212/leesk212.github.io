@@ -160,7 +160,7 @@ sequences that fall between jump instructions, and find that payloads with lower
 * The basic idea then is to find a strings of English words that mimic the execution behavior of our custom decoder.
 * To achieve this goal, we use a smoothed n-gram language model. 
 
-//n-gram model을 활용해 payload를 encode하여 동일한 동작을 하는 english sheel code를 만드는 과정
+//n-gram model을 활용해 payload를 encode하여 동일한 동작을 하는 english shell code를 만드는 과정
 
 * That model is trained using a large set of English text, and is used to deduce the probability of word sequences.
 * As language generation proceeds, each instruction in the decoder is assigned a numerical value.
@@ -172,14 +172,65 @@ sequences that fall between jump instructions, and find that payloads with lower
 * Ultimately, we traverse the language model using a beam search to find strings of words that score the highest possible value and operate in an identical manner as the decoder developed by hand.
 * **Finally, to encode the original payload, we continue to sample strings from our language model all the while generating prose that is functionally equivalent to the target shellcode when executed.**
 
-### Our Approach
+### Our Approach (문제점 다수 도출)
 * Recall that unlike other attack components, the decoder must reside in memory as executable code.
 * This exposure can make identifying the decoder a useful step in facilitating detection and prevention (e.g., by determining if a portion of the payload “looks” executable).
 * Thus, from an attacker’s perspective, masking the decoder may reduce the likelihood of detection and help to facilitate clandestine attacks. 
 * Designing a decoder under unnatural constraints can be very challenging, and this difficulty is not unique to English shellcode.
 * Self-modification is often used to address this problem whereby permissible code modifies portions of the payload such that non-compliant instructions are patched in at runtime, thereby passing any input filters. 
 * These additional instructions provide an attacker with more versatility and may make an otherwise impotent attack quite powerful.
-* Self-modification is particularly useful for overcoming some of the challenges unique to English shellcode. 
-* Among the English-compatible instructions, for example, there is no native support for loops or addition. 
-* Issues like these are relevant because decoding a payload without certain instructions, while possible, can quickly become impractical. 
-* For instance, a decoder without a looping mechanism must be proportional in length to the length of its encoded payload, possibly exposing its existence by nature of its size and form on the wire.
+* (problem) Self-modification is particularly useful for overcoming some of the challenges unique to English shellcode. 
+* (problem) Among the English-compatible instructions, for example, there is no native support for loops or addition. 
+* (problem) Issues like these are relevant because decoding a payload without certain instructions, while possible, can quickly become impractical. 
+* (problem) For instance, a decoder without a looping mechanism must be proportional in length to the length of its encoded payload, possibly exposing its existence by nature of its size and form on the wire.
+
+
+## The decoder
+* We are able to avoid these problems by building a selfmodifying decoder that has the form: initialization, decoder, encoded payload. 
+* Intuitively, the first component builds an initial decoder in memory (through self-modification) which when executed, expands the working instruction set, providing the decoder with IA32 operations beyond those provide by English prose.
+* The decoder then decodes the next segment (the encoded payload), again via self-modification.
+* We build our decoder using a number of principles that help guide its design. 
+   * First and foremost, the decoder must use only English-compatible instructions or the goal of creating English shellcode cannot be realized. 
+   * Furthermore, we are particularly interested in English-compatible instructions that can be used, alone or in conjunction, to produce useful instructions (via self modification) that are not English-compatible. 
+   * For example, our decoder uses multiple and instructions (which are English-compatible) to generate add instructions (which are not English-compatible). 
+   * Taken together, it could be said that these first two goals also provide a foundation for the design of alphanumeric decoders.
+   * However, our third design principle, which is not shared by alphanumeric shellcode engines, is to favor instructions that have less-constrained ASCII equivalents. 
+     * For instance, we will likely favor the instruction push %eax (“P”) over push %ecx (“Q”) when designing our decoder since the former is more common in English text. 
+* The same guiding principle is applied when choosing literal values. 
+* It is important to note that even though we followed these principles in designing our decoder, they are not hard requirements and there are other capable approaches. 
+* What we provide here is a proof of concept to demonstrate our point.
+
+### Initilization 
+// {1씩 증가를 하면 register에 영향을 주니까 그걸 완화시키는 기술적인 방법을 말한다}
+* In its initialization phase, the decoder overwrites key machine registers and patches in machine instructions that are not English compatible. 
+* After successful exploitation of a software vulnerability, we assume that a pointer to the shellcode resides in one of the general purpose registers or other accessible memory. 
+* As pointed out by Polychronakis et al., this is common in non-self-contained shellcode [16]. 
+* In order to execute the target shellcode, a pointer to the encoded shellcode is needed. 
+* This pointer must address memory far beyond the first byte of the shellcode since one must first reserve space for the decoder.
+* Since the register containing the address of the shellcode is known, we can copy its pointer and add an offset to reach the encoded payload. 
+* Using only English-compatible ASCII characters, the increment instruction inc is the most obvious candidate for increasing a register’s value. 
+* However, this one-byte instruction will only increase the value of a register in increments of one, yielding no space for the decoder. Used this way, the inc instruction is insufficient.
+* Since the register containing the address of the shellcode is known, we can copy its pointer and add an offset to reach the encoded payload. 
+* Using only English-compatible ASCII characters, the increment instruction inc is the most obvious candidate for increasing a register’s value. 
+* However, this one-byte instruction will only increase the value of a register in increments of one, yielding no space for the decoder. 
+* Used this way, the inc instruction is insufficient.
+* **However, a single inc instruction can be used to increase a register value in increments of 256 after manipulating the alignment of the stack.**
+
+![image](https://user-images.githubusercontent.com/67637935/201290978-531cdd43-ee5b-4f8d-8153-a4b909422d6d.png)
+
+* This process is depicted in Figure 5.
+* For instance, we can first push the shellcode pointer onto the stack and shift the stack pointer %esp by one byte. 
+* Once shifted, the pop instruction places the three least-significant bytes of the shellcode pointer into a register where its value is increased using inc multiple times.
+* Afterwards, the value of this register is pushed back onto the stack and the stack is realigned. 
+* The top of the stack, which at first contained the shellcode pointer, now contains the same value increased by increments of 256. 
+* By popping this value into a register, we can use it to address the encoded payload.
+
+### Unpacking the decoder
+* To facilitate looping, instructions that are not English compatible (e.g., the lods and add instructions) are needed. 
+* However, to generate these, the shellcode can manipulate its contents to patch in the required instructions. 
+  * For example, an and instruction can be used to create an add instruction. 
+  * The opcode for and is equivalent to the ASCII space character (0x20), which is convenient because the space character is the most common character in English. 
+  * The variant used in our proof of concept is three bytes in length and takes the form “AND r/m8, r8”. 
+  * Its first parameter, r/m8, addresses the bytes to be modified, while the second specifies one of the partial registers.
+  * The opcode for the add operations we create is 0x00. This means that the partial register and the byte addressed by the r/m8 operand must yield a value of zero when the and operation is executed. 
+  * Thus, the partial registers used are chosen such that a zero byte is created at r/m8.
