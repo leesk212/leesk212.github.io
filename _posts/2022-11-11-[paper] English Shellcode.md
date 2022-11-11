@@ -128,13 +128,19 @@ sequences that fall between jump instructions, and find that payloads with lower
 *  The steps depicted in Figure 3 complement the brief overview of our approach presented below.
 ![image](https://user-images.githubusercontent.com/67637935/201276307-ede8113a-42f1-4793-84ce-84b034e79d55.png)
 
-  1) English-Compatible Decoder
-     * Write a decoder that is capable of encoding generic payloads using only English-compatible instructions.  
-  2) Language Model Generation
+  1. English-Compatible Decoder
+     * Write a decoder that is capable of encoding generic payloads using only English-compatible instructions. 
+
+
+  2. Language Model Generation
      * Generate and train a natural language model with a large and diverse corpus of English text. 
-  3) Viterbi Search and Execution
+
+
+  3. Viterbi Search and Execution
      * Using Viterbi search, traverse the language model, executing and scoring each candidate decoder.
-  4) Encode Target Shellcode
+
+
+  4. Encode Target Shellcode
      * Continue to traverse the language model, encoding the target shellcode as English. Upon delivery, this code will be decoded and executed. 
 
 
