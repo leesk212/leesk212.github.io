@@ -65,25 +65,45 @@ being exploited arise due to some level of neglect on the part of system and app
 # On the ARMS RACE
 * In this paper, we focus on natively-executable shellcode for x86 processors. 
 * In this case, machine code and shellcode are fundamentally identical; they both adhere to the same binary representation directly executable by the processor.
-* Shellcode developers are often faced with constraints that limit the range of byte-values accepted by a vulnerable application.
-* For instance, many applications restrict input to certain character-sets (e.g., printable, alphanumeric, MIME), or filter input with common library routines like isalnum and strspn.
+* Shellcode developers are often faced with constraints that **limit the range of byte-values accepted by a vulnerable application.**
+  * For instance, many applications restrict input to certain character-sets (e.g., printable, alphanumeric, MIME), or filter input with common library routines like isalnum and strspn.
 * The difficulty in overcoming these restrictions and bypassing input filters depends on the range of acceptable input.
-*  Of course, these restrictions can be bypassed by writing shellcode that does not contain restricted bytevalues (e.g., null-bytes).
-* Although such restrictions often limit the set of operations available for use in an attack, attackers have derived encodings to convert unconstrained shellcode honoring these restrictions by building equivalency operations from reduced instruction sets (e.g., [25, 11]).
-* Of special note are the alphanumeric encoding engines [18] present in Metasploit (see www.metasploit.com). 
-* These engines convert arbitrary payloads to representations composed only of letters and numerical digits. 
-* These encodings are significant for two reasons.
-* First, alphanumeric shellcode can be stored in atypical and otherwise unsuspected contexts such as syntactically valid file and directory names or user passwords [18]. 
-* Second, the alphanumeric character set is significantly smaller than the set of characters available in Unicode and UTF-8 encodings.
-* This means that the set of instructions available for composing alphanumeric shellcode is relatively small. 
-* To cope with these restrictions, patching or self-modification is often used. 
-* Since alphanumeric engines produce encodings automatically, a decoder is required.
-* The challenge then is to develop an encoding scheme and decoder that use only alphanumeric characters (and hence, a restricted instruction set), yet are together capable of encoding arbitrary payloads. 
+  * Of course, these restrictions can be bypassed by writing shellcode that does not contain restricted bytevalues (e.g., null-bytes).
+  * Although such restrictions often limit the set of operations available for use in an attack, attackers have derived encodings to convert unconstrained shellcode honoring these restrictions by building equivalency operations from reduced instruction sets (e.g., [25, 11]).
+    * Of special note are the alphanumeric encoding engines [18] present in Metasploit (see www.metasploit.com). 
+    * **These engines convert arbitrary payloads to representations composed only of letters and numerical digits.(이 엔진은 임의의 페이로드를 문자와 숫자로만 구성된 표현으로 변환합니다.)** 
+  * These encodings are significant for two reasons.
+    * First, alphanumeric shellcode can be stored in atypical and otherwise unsuspected contexts such as syntactically valid file and directory names or user passwords (영숫자 쉘코드는 구문적으로 유효한 파일 및 디렉토리 이름 또는 사용자 암호와 같은 비정형적이거나 의심되지 않는 컨텍스트에 저장할 수 있습니다.). 
+    * Second, the alphanumeric character set is significantly smaller than the set of characters available in Unicode and UTF-8 encodings( 영숫자 문자 집합은 유니코드 및 UTF-8 인코딩에서 사용할 수 있는 문자 집합보다 상당히 작습니다.).
+  * This means that **the set of instructions available for composing alphanumeric shellcode is relatively small. **
+  * To cope with these restrictions, patching or self-modification is often used. 
+  * **Since alphanumeric engines produce encodings automatically, a decoder is required.**
+  * **The challenge then is to develop an encoding scheme and decoder that use only alphanumeric characters (and hence, a restricted instruction set), yet are together capable of encoding arbitrary payloads.**
 * The top three rows in Figure 1 show examples using the Metasploit framework.
 
-![image](https://user-images.githubusercontent.com/67637935/201266401-bc386478-bae9-4fd4-9f40-be28fa38708d.png)
+![image](https://user-images.githubusercontent.com/67637935/201266401-bc386478-bae9-4fd4-9f40-be28fa38708d.png) 
+> Example encodings of a Linux IA32 Bind Shell. The PexAlphaNum and Alpha2 encodings were generated using the Metasploit Framework. A hash symbol in the last column represents a character that is either unprintable or from the extended ASCII character set.
 
 * We note that much of the literature describing code injection attacks (and prevention) assumes a standard attack template consisting of the basic components found traditionally in buffer-overflow attacks: a NOP sled, shellcode, and one or more pointers to the shellcode [1, 12, 23, 27]. 
-* Not surprisingly, the natural reaction has been to develop techniques that detect such structure or behavior [20, 23, 16, 15, 27, 14]. While emulation and static analysis have been successful in identifying some of the failings of advanced shellcode, in the limit, the overhead will likely make doing so improbable.
-* Moreover, attacks are not constrained to this layout and so attempts at merely detecting this structure can be problematic; infact, identifying each component has its own unique set of challenges [1, 13], and it has been suggested that malicious polymorphic behavior cannot be modeled effectively [20]. 
-* In support of that argument, we provide a concrete instantiation that shows that the decoder can share the same properties as benign data.
+  * Not surprisingly, the natural reaction has been to develop techniques that detect such structure or behavior [20, 23, 16, 15, 27, 14]. While emulation and static analysis have been successful in identifying some of the failings of advanced shellcode, in the limit, the overhead will likely make doing so improbable.
+  * Moreover, attacks are not constrained to this layout and so attempts at merely detecting this structure can be problematic; infact, identifying each component has its own unique set of challenges [1, 13], and it has been suggested that malicious polymorphic behavior cannot be modeled effectively [20]. 
+  * In support of that argument, we provide a concrete instantiation that shows that the decoder can share the same properties as benign data.
+
+# Related Work (분류를 소개하고, 세부적인 관련 연구들을 소개한다-->괜찮은듯)
+* Three types of defensive approaches about code-injection attacks
+  1. **Tools and techniques to both limit the spoils of exploitations and to prevent developers from writing vulnerable code.**
+    * Examples of such approaches include automatic bounds protection for buffers [4] and static checking of format strings at compile-time, utilizing “safe” versions of system libraries, and address-space layout randomization [19], etc
+    * While these techniques reduce the attack surface for code-injection attacks, no combination of such techniques seems to systematically eliminate the threat of code-injection [6, 21].
+  2. **In light of persistent vulnerabilities, the second category of countermeasures focuses on preventing the execution of injected code.**
+    * In this realm, researchers have demonstrated some success using methods that randomize the instructionset [22] or render portions of the stack non-executable.
+    * Although these approaches can be effective, instruction-set randomization is considered too inefficient for some workloads. 
+    * Additionally, recent work by Buchanan et al. demonstrates that without better support for constraining program behavior, execution-redirection attacks are still possible [3].  
+  3. The third category for code-injection defense **consists of content-based input-validation techniques.**
+    * These approaches are either host or network-based and are typically used as components in intrusion detection systems. 
+    * User-input or network traffic is considered suspicious when it appears executable or anomalous as determined by heuristic, signature, or simulation.
+    * In this area, Toth and Kruegel detect some buffer overflow exploits by **interpreting network payload**s as executable code and analyzing their execution structure [23]. They divide machine instructions into two categories separated by those that modify the program counter, i.e., jump instructions, and others that do not. Their experiments show that, under some circumstances, it is possible to identify payloads with executable code by evaluating the maximum length of instruction
+sequences that fall between jump instructions, and find that payloads with lower maximum execution lengths are typically benign. However, their evaluation does not include an analysis of polymorphic code, and Kolesnikov et al. show that polymorphic blending attacks evade this detection approach [9].
+* Lastly, Song et al. examine popular polymorphic shellcode engines to assess their strengths and weaknesses [20]. 
+  * Our work supports their observations in that while today’s polymorphic engines do generate observable artifacts, these artifacts are not intrinsically symptomatic of polymorphic code.
+  * **However, while they advise that modeling acceptable content or behavior may lead to a better long-term solution for preventing shellcode delivery, we argue that even modeling acceptable content will be rife with its own set of challenges, as exemplified by English shellcode.**
+  * Specifically, by generating malicious code that draws from a language model built using only benign content, statistical measures of intent become less accurate and the signal-to-noise ratio between malicious code and valid network data declines.
