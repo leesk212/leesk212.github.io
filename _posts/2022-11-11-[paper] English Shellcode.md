@@ -155,4 +155,22 @@ sequences that fall between jump instructions, and find that payloads with lower
 
 ![image](https://user-images.githubusercontent.com/67637935/201280360-da781859-bcc5-442e-bfd9-e70c2c2151ce.png)
 
-* This intermediate result is similar in spirit to the alphanumeric decoders, however, our decoder is further constrained by a guiding principle to avoid certain character patterns that might later make finding an English equivalent more difficult, e.g., the string of mostly capital letters that compose the PexAlphaNum and Alpha2 decoders depicted in Figure 1 would likely result in poor English shellcode.
+* This intermediate result is similar in spirit to the alphanumeric decoders, however,**our decoder is further constrained by a guiding principle to avoid certain character patterns that might later make finding an English equivalent more difficult**, e.g., the string of mostly capital letters that compose the PexAlphaNum and Alpha2 decoders depicted in Figure 1 would likely result in poor English shellcode.
+
+* The basic idea then is to find a strings of English words that mimic the execution behavior of our custom decoder.
+* To achieve this goal, we use a smoothed n-gram language model. 
+
+//n-gram model을 활용해 payload를 encode하여 동일한 동작을 하는 english sheel code를 만드는 과정
+
+* That model is trained using a large set of English text, and is used to deduce the probability of word sequences.
+* As language generation proceeds, each instruction in the decoder is assigned a numerical value.
+* Intuitively, as we select candidate strings from the language model, each is executed under supervision.
+* We use the numerical values to indicate the strength of each candidate. 
+* If a candidate string produces the same net effect of the first instruction of our decoder when executed, we say that its score is one.
+* If a candidate string produces the net effect of the first two instructions, its score is two (and so on).
+* At each stage, highscoring candidates are kept (and used in driving the language model forward) and low-scoring candidates (or those that crash the simulator) are discarded.
+* Ultimately, we traverse the language model using a beam search to find strings of words that score the highest possible value and operate in an identical manner as the decoder developed by hand.
+* **Finally, to encode the original payload, we continue to sample strings from our language model all the while generating prose that is functionally equivalent to the target shellcode when executed.**
+
+### Our Approach
+* 
