@@ -127,6 +127,7 @@ sequences that fall between jump instructions, and find that payloads with lower
 * This English shellcode is completely self-contained, i.e., it does not require an external loader, and executes as valid IA32 code. 
 *  The steps depicted in Figure 3 complement the brief overview of our approach presented below.
 ![image](https://user-images.githubusercontent.com/67637935/201276307-ede8113a-42f1-4793-84ce-84b034e79d55.png)
+
   1) English-Compatible Decoder
      * Write a decoder that is capable of encoding generic payloads using only English-compatible instructions.  
   2) Language Model Generation
