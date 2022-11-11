@@ -61,3 +61,29 @@ being exploited arise due to some level of neglect on the part of system and app
   * Although most of the attacks observed today have used relatively na¨ıve shellcode engines [17, 26], exploit code will likely continue to evade intrusion detection and prevention systems because malcode developers do not follow the “rules”. 
   * As this cat and mouse game plays on, it is clear that the attackers will adapt.
   * So should we, especially as it pertains to exploring new directions for preventative measures against code-injection attacks.
+
+# On the ARMS RACE
+* In this paper, we focus on natively-executable shellcode for x86 processors. 
+* In this case, machine code and shellcode are fundamentally identical; they both adhere to the same binary representation directly executable by the processor.
+* Shellcode developers are often faced with constraints that limit the range of byte-values accepted by a vulnerable application.
+* For instance, many applications restrict input to certain character-sets (e.g., printable, alphanumeric, MIME), or filter input with common library routines like isalnum and strspn.
+* The difficulty in overcoming these restrictions and bypassing input filters depends on the range of acceptable input.
+*  Of course, these restrictions can be bypassed by writing shellcode that does not contain restricted bytevalues (e.g., null-bytes).
+* Although such restrictions often limit the set of operations available for use in an attack, attackers have derived encodings to convert unconstrained shellcode honoring these restrictions by building equivalency operations from reduced instruction sets (e.g., [25, 11]).
+* Of special note are the alphanumeric encoding engines [18] present in Metasploit (see www.metasploit.com). 
+* These engines convert arbitrary payloads to representations composed only of letters and numerical digits. 
+* These encodings are significant for two reasons.
+* First, alphanumeric shellcode can be stored in atypical and otherwise unsuspected contexts such as syntactically valid file and directory names or user passwords [18]. 
+* Second, the alphanumeric character set is significantly smaller than the set of characters available in Unicode and UTF-8 encodings.
+* This means that the set of instructions available for composing alphanumeric shellcode is relatively small. 
+* To cope with these restrictions, patching or self-modification is often used. 
+* Since alphanumeric engines produce encodings automatically, a decoder is required.
+* The challenge then is to develop an encoding scheme and decoder that use only alphanumeric characters (and hence, a restricted instruction set), yet are together capable of encoding arbitrary payloads. 
+* The top three rows in Figure 1 show examples using the Metasploit framework.
+
+![image](https://user-images.githubusercontent.com/67637935/201266401-bc386478-bae9-4fd4-9f40-be28fa38708d.png)
+
+* We note that much of the literature describing code injection attacks (and prevention) assumes a standard attack template consisting of the basic components found traditionally in buffer-overflow attacks: a NOP sled, shellcode, and one or more pointers to the shellcode [1, 12, 23, 27]. 
+* Not surprisingly, the natural reaction has been to develop techniques that detect such structure or behavior [20, 23, 16, 15, 27, 14]. While emulation and static analysis have been successful in identifying some of the failings of advanced shellcode, in the limit, the overhead will likely make doing so improbable.
+* Moreover, attacks are not constrained to this layout and so attempts at merely detecting this structure can be problematic; infact, identifying each component has its own unique set of challenges [1, 13], and it has been suggested that malicious polymorphic behavior cannot be modeled effectively [20]. 
+* In support of that argument, we provide a concrete instantiation that shows that the decoder can share the same properties as benign data.
