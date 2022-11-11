@@ -173,4 +173,13 @@ sequences that fall between jump instructions, and find that payloads with lower
 * **Finally, to encode the original payload, we continue to sample strings from our language model all the while generating prose that is functionally equivalent to the target shellcode when executed.**
 
 ### Our Approach
-* 
+* Recall that unlike other attack components, the decoder must reside in memory as executable code.
+* This exposure can make identifying the decoder a useful step in facilitating detection and prevention (e.g., by determining if a portion of the payload “looks” executable).
+* Thus, from an attacker’s perspective, masking the decoder may reduce the likelihood of detection and help to facilitate clandestine attacks. 
+* Designing a decoder under unnatural constraints can be very challenging, and this difficulty is not unique to English shellcode.
+* Self-modification is often used to address this problem whereby permissible code modifies portions of the payload such that non-compliant instructions are patched in at runtime, thereby passing any input filters. 
+* These additional instructions provide an attacker with more versatility and may make an otherwise impotent attack quite powerful.
+* Self-modification is particularly useful for overcoming some of the challenges unique to English shellcode. 
+* Among the English-compatible instructions, for example, there is no native support for loops or addition. 
+* Issues like these are relevant because decoding a payload without certain instructions, while possible, can quickly become impractical. 
+* For instance, a decoder without a looping mechanism must be proportional in length to the length of its encoded payload, possibly exposing its existence by nature of its size and form on the wire.
