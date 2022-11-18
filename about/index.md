@@ -47,8 +47,8 @@ After graduation, I am expected as a security developer or researcher member of 
 * (Running 2)
 
 ### [Patent]
-* (출원 번호: 10-2022-0134022 ) __이석민__, 신영주, "전자 장치 및 그의 암호 분석 방법(ELECTRONIC APPARATUS AND CRYPTANALYSIS METHOD THEREOF)", 2022.10.18
-* (Running 2)
+* (출원 번호: 10-2022-0154568) __이석민__, 신영주, "CPU의 이상을 탐지하는 방법 및 이를 위한 장치 {METHOD FOR DETECTING CPU ANOMALY TAND APPARATUS FOR SAME}"
+* (출원 번호: 10-2022-0134022) __이석민__, 신영주, "전자 장치 및 그의 암호 분석 방법(ELECTRONIC APPARATUS AND CRYPTANALYSIS METHOD THEREOF)", 2022.10.18
 
 ### [Software Copyright]
 * (출원 번호: 제 C-2022-036572 호) __이석민__, 신영주, "Att-BLSTM을 활용한 PMC Counter 시계열 데이터 기반 이상 행위 탐지 소프트웨어", 한국 저작권 위원회, 2022.09 
