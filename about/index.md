@@ -28,6 +28,7 @@ After graduation, I am expected as a security developer or researcher member of 
 * [[Link](https://dl.acm.org/doi/abs/10.1007/978-3-030-89432-0_18)] __Seokmin Lee__, Taehun Kim and Youngjoo Shin, "Quantitative Analysis on Attack Capacity in Meltdown-type Attacks," The 22nd World Conference on Information Security Applications (WISA), August, 11-13, 2021, Jeju, South Korea
 
 #### > Domestic Conference
+* [[Link](https://outoftheblackbox.site/)] __이석민__, 김상엽, 김태훈, 신영주 "Efficient cache covert channel for enhancing Meltdown attack", 2022 한국소프트웨어종합학술대회 (KSC2022), 제주, 2022.11
 * [[Link](https://www.manuscriptlink.com/society/kiisc/conference/ciscw2022)] 한창희, __이석민__, 신영주, "A Survey on Kubernetes Workload Security for Zero Trust Architecture", 한국정보보호학회 동계학술대회 (CISC-W), 서울, 2022.11
 * [[Link](https://www.manuscriptlink.com/society/kiisc/conference/ciscs2022)] __이석민__,  신영주 "Design of High-performance Cryptanalysis System based on GPUDirect RDMA", 한국정보보호학회 하계학술대회 (CISC-S), 부산, 2022.06
 * [[Link](https://www.dbpia.co.kr/journal/articleDetail?nodeId=NODE11035871)] __이석민__, 노승일, 김태훈, 신영주 "Empirical study of usage of SMTP TLS Reporting", 2021 한국소프트웨어종합학술대회 (KSC2021), 강원, 2021.11
