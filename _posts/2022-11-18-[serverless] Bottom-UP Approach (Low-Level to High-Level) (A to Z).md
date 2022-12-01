@@ -113,3 +113,81 @@ So, Goal: increasing utilization (and lowering cost), the team established const
 
 * Because the goal of Firecracker is to be as small as possible, the paper calls the project a MicroVM, rather than “VM”.
 > Firecracker의 목표는 가능한 한 작게 만드는 것이기 때문에 논문에서는 이 프로젝트를 "VM"이 아닌 MicroVM이라고 부릅니다.
+
+## How do Firecracker MicroVMs get run on AWS?
+* Now that we roughly understand how Firecracker works, let’s dive into how it is used in running Lambda. First, we will look at how the Lambda architecture works on a high level, followed by a look at how the running the Lambda itself works.
+> 이제 Firecracker의 작동 방식을 대략적으로 이해했으므로 Lambda를 실행하는 데 Firecracker가 어떻게 사용되는지 살펴보겠습니다. 먼저 Lambda 아키텍처가 높은 수준에서 작동하는 방식을 살펴본 다음 Lambda 실행 자체가 작동하는 방식을 살펴봅니다.
+
+### High-level architecture of AWS Lambda
+* When a developer runs (or Invokes, in AWS terminology) a Lambda, the ensuing HTTP request hits an AWS Load Balancer** ( ** Lambda는 '스토리지(S3), 대기열(SQS), 스트리밍 데이터(Kinesis) 및 데이터베이스(DynamoDB) 서비스를 포함한 다른 AWS 서비스와의 통합'과 같은 다른 이벤트를 통해 시작할 수도 있습니다.)
+> 개발자가 Lambda를 실행(또는 AWS 용어로 호출)하면 후속 HTTP 요청이 AWS Load Balancer에 도달합니다.
+
+![image](https://user-images.githubusercontent.com/67637935/204987064-7ca59d08-6f97-4fde-af5f-8824dea5bc05.png)
+
+* There are a four main infrastructure components involved in running a Lambda once it has been invoked:
+> 호출된 후 Lambda 실행과 관련된 네 가지 주요 인프라 구성 요소가 있습니다.
+
+  1.  Workers: The components that actually run a Lambda’s code. Each worker runs many MicroVMs in “slots”, and other services schedule code to be run in the MicroVMs when a customer Invokes a Lambda.
+  * > Workers: 실제로 Lambda의 코드를 실행하는 구성 요소입니다. 각 작업자는 "슬롯"에서 많은 MicroVM을 실행하고 다른 서비스는 고객이 Lambda를 호출할 때 MicroVM에서 실행되도록 코드를 예약합니다.
+  
+  2.  Frontend: The entrance into the Lambda system. It receives Invoke requests, and communicates with the Worker Manager to determine where to run the Lambda, then directly communicates with the Workers.
+  * > Frontend: Lambda 시스템으로 들어가는 입구입니다. Invoke 요청을 수신하고 Worker Manager와 통신하여 Lambda를 실행할 위치를 결정한 다음 Worker와 직접 통신합니다.
+  
+  3.  Worker Manager: Ensures that the same Lambda is routed to the same set of Workers (this routing impacts performance for reasons that we will learn more about in the next section). It keeps tracks of where a Lambda has been scheduled previously. These previous runs correspond to “slots” for a function. If all of the slots for a function are in use, the Worker Manager works with the Placement service to find more slots in the Workers fleet.
+  * > **Worker Manager: 동일한 Lambda가 동일한 작업자 세트로 라우팅되도록 합니다(이 라우팅은 다음 섹션에서 자세히 알아볼 이유로 성능에 영향을 미칩니다).** Lambda가 이전에 예약된 위치를 추적합니다. 이러한 이전 실행은 함수의 "슬롯"에 해당합니다. 기능에 대한 모든 슬롯이 사용 중인 경우 작업자 관리자는 배치 서비스와 협력하여 작업자 플릿에서 더 많은 슬롯을 찾습니다.
+
+  4.  Placement service: Makes scheduling decisions when it needs to assign a Lambda invocation to a Worker. It makes these decision in order to “optimize the placement of slots for a single function across the worker fleet, ensuring that the utilization of resources including CPU, memory, network, and storage is even across the fleet and the potential for correlated resource allocation on each individual worker is minimized”
+  * > Placement service: 작업자에게 Lambda 호출을 할당해야 하는 경우 일정 결정을 내립니다. 이러한 결정은 "작업자 플릿 전체에서 단일 기능에 대한 슬롯 배치를 최적화하여 CPU, 메모리, 네트워크 및 스토리지를 포함한 리소스 활용이 플릿 전체에서 균일하고 관련 리소스 할당 가능성이 있는지 확인합니다. 개별 작업자가 최소화됩니다.”
+
+### Lambda worker architecture
+* Each Lambda worker has thousands of individual MicroVMs that map to a “slot”.
+> 각 Lambda 작업자에는 "슬롯"에 매핑되는 수천 개의 개별 MicroVM이 있습니다.
+
+![image](https://user-images.githubusercontent.com/67637935/204988827-9da93881-9e6d-48b2-9dc9-8a1b5813afbd.png)
+
+* Each MicroVM is associated with resource constraints (configured when a Lambda is setup) and communicates with several components that allow for scheduling, isolated execution, and teardown of customer code inside of a Lambda:
+> 각 MicroVM은 리소스 제약 조건(Lambda가 설정될 때 구성됨)과 연결되며 예약, 격리된 실행 및 Lambda 내부의 고객 코드 분해를 허용하는 여러 구성 요소와 통신합니다.
+  * Firecracker VM: All of the goodness we talked about earlier.
+  * > Firecracker VM: 이전에 이야기한 모든 장점입니다.
+
+  * Shim process: A process inside of the VM that communicates with an external side car called the Micro Manager.
+  * > Shim 프로세스: Micro Manager라는 외부 사이드카와 통신하는 VM 내부의 프로세스입니다.
+
+  * Micro Manager: a sidecar that communicates over TCP with a Shim process running inside the VM. It reports metadata that it receives back to the Placement service, and can be called by the Frontend in order to Invoke a specific function. On function completion, the Micro Manager also receives the response from the Shim process running inside the VM (passing it back to the client as needed).
+  * > Micro Manager: VM 내부에서 실행되는 Shim 프로세스와 TCP를 통해 통신하는 사이드카입니다. Placement 서비스로 다시 수신한 메타데이터를 보고하고 특정 기능을 호출하기 위해 프런트엔드에서 호출할 수 있습니다. 기능 완료 시 Micro Manager는 VM 내에서 실행 중인 Shim 프로세스로부터 응답도 받습니다(필요에 따라 클라이언트에 다시 전달).
+
+* While slots can be filled on demand, the Micro Manager also starts up Firecracker VMs in advance - this helps with performance (as we will see in the next section).
+> 필요에 따라 슬롯을 채울 수 있지만 Micro Manager는 미리 Firecracker VM을 시작합니다. 이는 성능에 도움이 됩니다(다음 섹션에서 살펴보겠습니다).
+
+### Performance
+
+![image](https://user-images.githubusercontent.com/67637935/204991108-2192563f-c753-4b25-ae76-2ce13b4f7651.png)
+
+* Firecracker was evaluated relative to similar VMM solutions on three dimensions: boot times, memory overhead, and IO Performance. In these tests, Firecracker was compared to QEMU and Intel Cloud Hypervisor
+> Firecracker는 부팅 시간, 메모리 오버헤드 및 IO 성능이라는 세 가지 차원에서 유사한 VMM 솔루션과 비교하여 평가되었습니다. 이 테스트에서 Firecracker는 QEMU 및 인텔 클라우드 하이퍼바이저와 비교되었습니다.
+* Additionally, there are two configurations of Firecracker used in the tests: Firecracker and Firecracker-pre.
+> 또한 테스트에 사용된 Firecracker에는 Firecracker와 Firecracker-pre의 두 가지 구성이 있습니다.
+* Because Firecracker MicroVMs are configured via API calls, the team tested setups where the API calls had completed (Firecracker-pre, where the “pre” means “pre-configured”) or had not completed (regular Firecracker). 
+> Firecracker MicroVM은 API 호출을 통해 구성되기 때문에 팀은 API 호출이 완료되었거나(Firecracker-pre, 여기서 "사전"은 "사전 구성됨"을 의미함) 완료되지 않은(일반 Firecracker) 설정을 테스트했습니다.
+* The timer for both of these configurations ended when the init process in the VM started.
+> 이 두 구성 모두에 대한 타이머는 VM의 초기화 프로세스가 시작될 때 종료되었습니다.
+
+#### Boot times
+* 부팅 시간 비교에는 총 500개의 MicroVM을 직렬로 부팅하는 것과 한 번에 50개씩(병렬로) 총 1000개의 MicroVM을 부팅하는 두 가지 구성이 포함됩니다.
+
+![image](https://user-images.githubusercontent.com/67637935/204991270-8e60d651-29ac-4775-9497-a3410c6226a9.png)
+
+* 이러한 테스트의 결론은 Firecracker MicroVM이 매우 빠르게 부팅된다는 것입니다. 빠른 전환 ✅!
+
+#### Memory overhead
+* Firecracker는 다른 옵션에 비해 훨씬 적은 메모리(오버헤드 및 밀도)를 사용합니다.
+
+![image](https://user-images.githubusercontent.com/67637935/204991407-eeb8f662-a758-4dd7-9642-a5847c2da502.png)
+
+#### I/O Performance
+* 다른 옵션에 비해 Firecracker와 이에 필적하는 인텔 클라우드 하이퍼바이저 솔루션은 모든 테스트에서 제대로 수행되지 않았습니다. 이 논문은 IO 테스트에서 상대적으로 열등한 성능의 원인이 디스크에 대한 플러시가 없고 IO를 직렬로 수행하는 블록 IO의 구현이라고 주장합니다. Firecracker에 대한 Github 문제를 파헤치면서 비동기 IO를 지원하고 IO 성능을 향상시키기 위해 io_uring을 사용하여 프로토타입을 만들고 있음을 나타내는 문제를 찾았습니다.
+
+![image](https://user-images.githubusercontent.com/67637935/204991518-7752efd0-81c4-4a73-a6fb-fe35b072c179.png)
+
+### Conclusion
+Firecracker는 Rust로 작성된 고성능의 낮은 오버헤드 VMM이기 때문에 흥미로운 내용이었습니다. 또한 이 문서는 실용적인 기술 의사 결정에 대한 훌륭한 연구입니다. 팀은 이미 강력한 소프트웨어(KVM)를 다시 작성하는 대신 기존 시스템의 특정 구성 요소를 개선하는 데 집중했습니다. 그 과정에서 우리는 고객 워크로드를 서로 격리하는 다양한 방법에 대해 배웠습니다.
