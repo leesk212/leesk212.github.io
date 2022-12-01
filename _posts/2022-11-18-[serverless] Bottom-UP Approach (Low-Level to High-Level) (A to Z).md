@@ -52,3 +52,64 @@ So, Goal: increasing utilization (and lowering cost), the team established const
 > 6. 소프트 할당: "CPU, 메모리 및 기타 리소스를 초과 할당할 수 있어야 합니다." 이 요구 사항은 활용도에 영향을 미치며 결과적으로 AWS/고객에 대한 시스템 비용에도 영향을 미칩니다. Firecracker VM의 수명 동안 오버 커밋이 몇 번 발생합니다. 예를 들어 시작할 때 이론적으로 리소스가 할당되지만 설정 작업을 수행하는 경우 바로 사용하지 않을 수 있습니다. __다른 경우에는 VM이 리소스에 대해 구성된 소프트 제한을 초과하여 버스트해야 할 수 있으며 다른 VM의 리소스를 소비__ 해야 합니다. 논문은 "우리는 20배 이상의 메모리 및 CPU 초과 사용률을 테스트했으며 문제 없이 최대 10배의 비율로 프로덕션 환경에서 실행했습니다." - 매우 깔끔합니다!
 
 <span style="color:blue"> 기존 VM에서 이런 soft allocation은 못잡을듯 한데..? 얘를들어 cryptojacking이 guestos에 설치가 되어서 자원을 떙겨썼어 그럼 기존 guest os에 설치되어서 탐지하는 것은 잘 안될 것 같은데.. 그리고 갑자기 든 생각인데 systemcall로 잡는 기법들은 해당 microVM 자체에서 systemcall을 제한하는 기법들 때문에 안될 듯? --> 그니까 cpu execution port를 활용한다 정도? 아무튼 guestOS에 설치 되어서 탐지하는 것의 serverless 특징을 조금 더 생각해보자 </span>
+
+* **The constraints were applied to three different categories of solutions: Linux containers, language-specific isolation, and alternative virtualization solutions (they were already using virtualization, but wanted to consider a different option than their existing implementation).**
+> **제약 조건은 1. Linux Container, 2. 언어별 격리 및 3. 대체 가상화 솔루션(이미 가상화를 사용하고 있었지만 기존 구현과 다른 옵션을 고려하기를 원함)의 세 가지 솔루션 범주에 적용되었습니다.**
+
+#### 1. Linux Containter
+* There are several Isolation downsides to using Linux containers.
+> Linux Container를 사용하면 Isolation에 몇가지 단점이 있다. 
+
+* First, Linux containers interact directly with a host OS using syscalls.
+> 첫번째로 Linux container는 hostOS의 syscall을 사용하여 직접적으로 상호작용한다. 
+
+* One can lock-down which syscalls a program can make (the paper mentions using Seccomp BPF), and even which arguments the syscalls can use, as well as using other security features of container systems (the Fly.io article linked above discusses this topic in more depth).
+> 특정 사람은 프로그램이 만들 수 있는 syscalls 들을 잠글 수 있다. (논문에서는 Seccomp BPF 사용을 언급함), 그리고 심지어 syscalls가 사용할 수 있는 인수는 물론 컨테이너 시스템의 다른 보안 기능(위에 링크된 Fly.io 기사에서 이 주제에 대해 설명함)을 또한 잠글 수 있다.
+
+* Even using other Linux isolation features, at the end of the day the container is still interacting with the OS. That means that if customer code in the container figures out a way to pwn the OS, or figures out a side channel to determine state of another container, Isolation might break down. Not great.
+> 다른 Linux 격리 기능을 사용하더라도 결국 컨테이너는 여전히 OS와 상호 작용합니다. 즉, 컨테이너의 고객 코드가 OS를 소유하는 방법을 알아내거나 다른 컨테이너의 상태를 결정하기 위해 사이드 채널을 알아내면 격리가 깨질 수 있습니다. 좋지않다. 
+
+#### 2. Language-specific isolation
+* While there are ways to run language-specific VMs (like the JVM for Java/Scala/Clojure or V8 for Javascript), this approach doesn’t scale well to many different languages (nor does it allow for a system that can run arbitrary binaries - one of the original design goals).
+> 언어별 VM(Java/Scala/Clojure용 JVM 또는 Javascript용 V8)을 실행하는 방법이 있지만 이 접근 방식은 다양한 언어로 잘 확장되지 않으며 임의의 바이너리를 실행할 수 있는 시스템도 허용하지 않습니다. - 원래 디자인 목표 중 하나).
+
+#### 3. Alternative Virtualization Solutions <span style="color:blue">("traditional VM과의 변경점으로 시사할 수 있을 것 같음")</span>
+* Revisiting virtualization led to a focus on what about the existing virtualization approach was holding Lambda back:
+> 가상화를 재검토하면서 기존 가상화 접근 방식이 Lambda를 방해하는 요소에 초점을 맞췄습니다.
+  * Isolation:  the code associated with the components of virtualization are lengthy (meaning more possible areas of exploitation), and [researchers have escaped from virtual machines before](https://www.computerworld.com/article/3182877/pwn2own-ends-with-two-virtual-machine-escapes.html).
+  * > 격리: 가상화 구성 요소와 관련된 코드가 길고(악용 가능한 영역이 더 많다는 의미) 연구자들은 이전에 가상 머신에서 탈출했습니다.
+  * Overhead and density: the components of virtualization (which we will get into further down) require too many resources, leading to low utilization
+  * > 오버헤드 및 밀도: 가상화 구성 요소(아래에서 자세히 설명)에는 너무 많은 리소스가 필요하므로 활용도가 낮습니다.
+  * Fast switching: VMs take a while to boot and shut down, which doesn’t mesh well with Lambda functions that need a VM quickly and may only use it for a few seconds (or less).
+  * > 빠른 전환: VM을 부팅하고 종료하는 데 시간이 걸리므로 VM이 빨리 필요한 Lambda 기능과 잘 맞지 않고 몇 초(또는 그 미만) 동안만 사용할 수 있습니다.
+
+* The team then applied the above requirements to the main components of the virtualization system: the hypervisor and the virtual machine monitor.
+> 그런 다음 팀은 위의 요구 사항을 가상화 시스템의 주요 구성 요소인 하이퍼바이저 및 가상 머신 모니터에 적용했습니다.
+
+* First, the team considered which type of hypervisor to choose. There are two types of hypervisors, Type 1 and Type 2. The textbook definitions of hypervisors say that Type 1 hypervisors are integrated directly in the hardware, while Type 2 hypervisors run an operating system on top of the hardware (then run the hypervisor on top of that operating system).
+> 먼저 팀은 선택할 하이퍼바이저 유형을 고려했습니다. 유형 1과 유형 2의 두 가지 유형의 하이퍼바이저가 있습니다. 하이퍼바이저에 대한 교과서 정의에서는 유형 1 하이퍼바이저가 하드웨어에 직접 통합되는 반면 유형 2 하이퍼바이저는 하드웨어 위에서 운영 체제를 실행(그런 다음 하이퍼바이저를 맨 위에서 실행)한다고 말합니다. 해당 운영 체제).
+
+![image](https://user-images.githubusercontent.com/67637935/204983883-f76de1ab-72cb-4f96-9db5-681421fe149d.png)
+
+* Linux has a robust hypervisor built into the kernel, called Kernel Virtual Machine (a.k.a. KVM) that is arguably a Type 1 hypervisor
+> Linux에는 유형 1 하이퍼바이저인 커널 가상 머신(일명 KVM)이라는 커널에 내장된 강력한 하이퍼바이저가 있습니다.
+
+* Using a hypervisor like KVM allows for kernel components to be moved into userspace - if the kernel components are in user space and they get pwned, the host OS itself hasn’t been pwned, Linux provides an interface, virtio, that allows the user space kernel components to interact with the host OS.
+> KVM과 같은 하이퍼바이저를 사용하면 커널 구성 요소를 사용자 공간으로 이동할 수 있습니다. - 커널 구성 요소가 사용자 공간에 있고 pwned되면 호스트 OS 자체는 pwned(완패)되지 않습니다. Linux는 사용자 공간 커널 구성 요소가 호스트 OS와 상호 작용할 수 있도록 하는 인터페이스인 virtio를 제공합니다
+
+* Rather than passing all interactions with a guest kernel directly to the host kernel, some functions, in particular device interactions, go from a guest kernel to a virtual machine monitor (a.k.a. VMM). One of the most popular VMMs is QEMU.
+> 게스트 커널과의 모든 상호 작용을 호스트 커널로 직접 전달하는 대신 일부 기능, 특히 장치 상호 작용은 게스트 커널에서 가상 머신 모니터(일명 VMM)로 이동합니다. 가장 인기 있는 VMM 중 하나는 QEMU입니다.
+
+![image](https://user-images.githubusercontent.com/67637935/204984488-6e4fba31-bb91-4231-983b-249078895bb8.png)
+
+* Unfortunately, QEMU has a significant amount of code (again, more code means more potential attack surface), as it supports a full range of functionality - even functionality that a Lambda would never use, like USB drivers.
+> 불행하게도 QEMU는 USB 드라이버와 같이 Lambda가 절대 사용하지 않는 기능까지 모든 범위의 기능을 지원하기 때문에 상당한 양의 코드(코드가 많을수록 잠재적인 공격 표면이 더 커짐)를 가지고 있습니다.
+
+* Rather than trying to pare down QEMU, the team forked crosvm (a VMM open-sourced by Google, and developed for ChromeOS),  in the process significantly rewriting core functionality for Firecracker’s use case.
+> 팀은 QEMU를 줄이는 대신 crosvm(Google이 오픈 소스로 제공하고 ChromeOS용으로 개발한 VMM)을 포크하여 Firecracker 사용 사례의 핵심 기능을 대폭 재작성했습니다.
+
+* The end result was a slimmer library with only code that would conceivably be used by a Lambda - resulting in 50k lines of Rust (versus > 1.4 million lines of C in QEMU)
+> 최종 결과는 Lambda에서 사용할 수 있는 코드만 있는 더 슬림한 라이브러리였습니다. 결과적으로 50k 줄의 Rust가 생성되었습니다(QEMU에서 > 140만 줄의 C와 비교).
+
+* Because the goal of Firecracker is to be as small as possible, the paper calls the project a MicroVM, rather than “VM”.
+> Firecracker의 목표는 가능한 한 작게 만드는 것이기 때문에 논문에서는 이 프로젝트를 "VM"이 아닌 MicroVM이라고 부릅니다.
