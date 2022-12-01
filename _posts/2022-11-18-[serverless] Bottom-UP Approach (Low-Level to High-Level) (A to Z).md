@@ -4,6 +4,11 @@ toc: True
 ---
 
 # What is Serverelss?
+
+> ref: * Li, Zijun, et al. "The serverless computing survey: A technical primer for design architecture." ACM Computing Surveys (CSUR) 54.10s (2022).
+
+![image](https://user-images.githubusercontent.com/67637935/204979420-57823419-14a7-479f-814b-2a7fa3b972e3.png)
+
 # What is Firecracker?
 ## Paper Review: "Firecracker: Lightweight Virtualization for Serverless Applications" 
 
