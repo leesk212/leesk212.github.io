@@ -114,6 +114,10 @@ So, Goal: increasing utilization (and lowering cost), the team established const
 * Because the goal of Firecracker is to be as small as possible, the paper calls the project a MicroVM, rather than “VM”.
 > Firecracker의 목표는 가능한 한 작게 만드는 것이기 때문에 논문에서는 이 프로젝트를 "VM"이 아닌 MicroVM이라고 부릅니다.
 
+## How does AWS Lambda wokr?
+
+![Untitled](https://user-images.githubusercontent.com/67637935/204999536-e54cdfb8-268e-4ad9-8100-d2dc8b851d17.png)
+
 ## How do Firecracker MicroVMs get run on AWS?
 * Now that we roughly understand how Firecracker works, let’s dive into how it is used in running Lambda. First, we will look at how the Lambda architecture works on a high level, followed by a look at how the running the Lambda itself works.
 > 이제 Firecracker의 작동 방식을 대략적으로 이해했으므로 Lambda를 실행하는 데 Firecracker가 어떻게 사용되는지 살펴보겠습니다. 먼저 Lambda 아키텍처가 높은 수준에서 작동하는 방식을 살펴본 다음 Lambda 실행 자체가 작동하는 방식을 살펴봅니다.
@@ -191,3 +195,4 @@ So, Goal: increasing utilization (and lowering cost), the team established const
 
 ### Conclusion
 Firecracker는 Rust로 작성된 고성능의 낮은 오버헤드 VMM이기 때문에 흥미로운 내용이었습니다. 또한 이 문서는 실용적인 기술 의사 결정에 대한 훌륭한 연구입니다. 팀은 이미 강력한 소프트웨어(KVM)를 다시 작성하는 대신 기존 시스템의 특정 구성 요소를 개선하는 데 집중했습니다. 그 과정에서 우리는 고객 워크로드를 서로 격리하는 다양한 방법에 대해 배웠습니다.
+
