@@ -44,7 +44,7 @@ After graduation, I am expected as a security developer or researcher member of 
 * [[Link](https://link.springer.com/chapter/10.1007/978-3-030-89432-0_18)] __Seokmin Lee__, Taehun Kim, and Youngjoo Shin. "Quantitative Analysis on Attack Capacity in Meltdown-Type Attacks." International Conference on Information Security Applications. Springer, Cham, 2021.
 
 #### > KCI
-* [[Link](http://journalhome2020-env.eba-bpefhmr2.ap-northeast-2.elasticbeanstalk.com/journals/jkiisc/digital-library/38193)] __이석민__ and 신영주, "GPUDirect RDMA 기반의 고성능 암호 분석 시스템 설계 및 구현," Journal of The Korea Institute of Information Security and Cryptology, vol. 32, no. 6, pp. 1127-1137, 2022. DOI: 10.13089/JKIISC.2022.32.6.1095.
+* [[Link](https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002906640)] __이석민__ and 신영주, "GPUDirect RDMA 기반의 고성능 암호 분석 시스템 설계 및 구현," Journal of The Korea Institute of Information Security and Cryptology, vol. 32, no. 6, pp. 1127-1137, 2022. DOI: 10.13089/JKIISC.2022.32.6.1095.
 
 * (Running 1)
 * (Running 2)
