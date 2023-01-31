@@ -46,8 +46,8 @@ After graduation, I am expected as a security developer or researcher member of 
 #### > KCI
 * [[Link](https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002906640)] __이석민__ and 신영주, "GPUDirect RDMA 기반의 고성능 암호 분석 시스템 설계 및 구현," Journal of The Korea Institute of Information Security and Cryptology, vol. 32, no. 6, pp. 1127-1137, 2022. DOI: 10.13089/JKIISC.2022.32.6.1095.
 
+* [[Link](www.bestbeoff.site)] __이석민__ , 노승일, 김태훈, 신영주 (2023) "SMTP TLS Reporting 사용 현황에 대한 실증 연구" 정보과학회 컴퓨팅의 실제 논문지, TBD, TBD
 * (Running 1)
-* (Running 2)
 
 ### [Patent]
 * (출원 번호: 10-2022-0154568) __이석민__, 신영주, "CPU의 이상을 탐지하는 방법 및 이를 위한 장치 {METHOD FOR DETECTING CPU ANOMALY TAND APPARATUS FOR SAME}"
