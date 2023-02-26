@@ -1,9 +1,3 @@
----
-tags: cloud aws 📖Review 
-toc: True
-title: [Reviewer]업무에 바로 쓰는 AWS 입문
----
-
 ```
 한빛미디어 <나는 리뷰어다> 활동을 위해서 책을 제공받아 작성된 서평입니다.
 ```
