@@ -1,5 +1,5 @@
 ---
-tags: 📖Review cloud aws 
+tags: cloud aws 📖Review 
 toc: True
 title: [Reviewer]업무에 바로 쓰는 AWS 입문
 ---
