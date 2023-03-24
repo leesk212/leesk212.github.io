@@ -1,6 +1,6 @@
 ---
 toc: True
-tags: cloud aws 📖Review 
+tags: Mobile Machine-Learning 📖Review 
 ---
 
 
