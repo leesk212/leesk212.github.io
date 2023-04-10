@@ -25,7 +25,7 @@ After graduation, I am expected as a security developer or researcher member of 
 ### [Conference]
 
 #### > Top Cyber Security Conferences
-* * [[Link](https://sp2023.ieee-security.org/index.html)] Taehun Kim, Hyeongjin Park, **Seokmin Lee**, Seunghee Shin, Junbeom Hur, Youngjoo Shin, “DevIOus: Device-Driven Side-Channel Attacks on the IOMMU”,  The 44th IEEE Symposium on Security and Privacy (S&P 2023), May 22-25, 2023, San Francisco, USA
+* [[Link](https://sp2023.ieee-security.org/index.html)] Taehun Kim, Hyeongjin Park, **Seokmin Lee**, Seunghee Shin, Junbeom Hur, Youngjoo Shin, “DevIOus: Device-Driven Side-Channel Attacks on the IOMMU”,  The 44th IEEE Symposium on Security and Privacy (S&P 2023), May 22-25, 2023, San Francisco, USA
 
 #### > Scopus 
 * [[Link](https://dl.acm.org/doi/abs/10.1007/978-3-030-89432-0_18)] __Seokmin Lee__, Taehun Kim and Youngjoo Shin, "Quantitative Analysis on Attack Capacity in Meltdown-type Attacks," The 22nd World Conference on Information Security Applications (WISA), August, 11-13, 2021, Jeju, South Korea
