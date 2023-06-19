@@ -31,6 +31,7 @@ After graduation, I am expected as a security developer or researcher member of 
 * [[Link](https://dl.acm.org/doi/abs/10.1007/978-3-030-89432-0_18)] __Seokmin Lee__, Taehun Kim and Youngjoo Shin, "Quantitative Analysis on Attack Capacity in Meltdown-type Attacks," The 22nd World Conference on Information Security Applications (WISA), August, 11-13, 2021, Jeju, South Korea
 
 #### > Domestic Conference
+* __이석민__, 신영주, "Analysis of Cryptojacking Malware operating in Serverless", 한국정보보호학회 동계학술대회 (CISC-W), 춘천, 2023.06
 * [[Link](https://www.dbpia.co.kr/pdf/pdfView.do?nodeId=NODE11224294)] __이석민__, 김상엽, 김태훈, 신영주 "Efficient cache covert channel for enhancing Meltdown attack", 2022 한국소프트웨어종합학술대회 (KSC2022), 제주, 2022.11
 * [[Link](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/876fb064-2e22-4d25-b419-da17ae125972/Zero_Trust_아키텍처_구현을_위한_쿠버네티스_워크로드_보안_연구_동향_최종본.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230110%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230110T035157Z&X-Amz-Expires=86400&X-Amz-Signature=f2b81cf4da9b7e99d7cc2960beeafa78ad3d6d7e672d7a3e7073ebc81d4cd05b&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D"Zero_Trust_%25EC%2595%2584%25ED%2582%25A4%25ED%2585%258D%25EC%25B2%2598_%25EA%25B5%25AC%25ED%2598%2584%25EC%259D%2584_%25EC%259C%2584%25ED%2595%259C_%25EC%25BF%25A0%25EB%25B2%2584%25EB%2584%25A4%25ED%258B%25B0%25EC%258A%25A4_%25EC%259B%258C%25ED%2581%25AC%25EB%25A1%259C%25EB%2593%259C_%25EB%25B3%25B4%25EC%2595%2588_%25EC%2597%25B0%25EA%25B5%25AC_%25EB%258F%2599%25ED%2596%25A5_%25EC%25B5%259C%25EC%25A2%2585%25EB%25B3%25B8.pdf"&x-id=GetObject)] 한창희, __이석민__, 신영주, "A Survey on Kubernetes Workload Security for Zero Trust Architecture", 한국정보보호학회 동계학술대회 (CISC-W), 서울, 2022.11
 * [[Link](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/87c84b6d-8a84-4e54-9ad9-e074bedf1619/%28최종%29Design_of_High-performance_Cryptanalysis_System_based_on_GPUDirect_RDMA.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230110%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230110T035445Z&X-Amz-Expires=86400&X-Amz-Signature=751180d5507d2e0cbd25196b920e72a1774db5d18a07ac8134c3ab7a1f9d1500&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D"%28%25EC%25B5%259C%25EC%25A2%2585%29Design%2520of%2520High-performance%2520Cryptanalysis%2520System%2520based%2520on%2520GPUDirect%2520RDMA.pdf"&x-id=GetObject)] __이석민__,  신영주 "Design of High-performance Cryptanalysis System based on GPUDirect RDMA", 한국정보보호학회 하계학술대회 (CISC-S), 부산, 2022.06
@@ -40,6 +41,7 @@ After graduation, I am expected as a security developer or researcher member of 
 
 ### [Journal]
 #### > SCI
+* (running *)
 * [[Link](https://www.hindawi.com/journals/scn/2022/7997509/)] Seungil Noh, Jaehan Kim, __Seokmin Lee__, Youngshin Kang, Cheolsoo Park, and Youngjoo Shin "Broken Heart : Privacy Leakage Analysis on ECG-based Authentication Schemes", Hindawi, 2022
 * [[Link](https://ieeexplore.ieee.org/abstract/document/9745092/)] Jaewoo Baek, Choongseop Lee, Hyunsoo Yu, Suwhan Baek, __Seokmin Lee__, Seungmin Leec, Cheolsoo Park "Automatic Sleep Scoring Using Intrinsic Mode based on Interpretable Deep Neural Networks", IEEE Access, 2022 
 
@@ -47,7 +49,6 @@ After graduation, I am expected as a security developer or researcher member of 
 * [[Link](https://link.springer.com/chapter/10.1007/978-3-030-89432-0_18)] __Seokmin Lee__, Taehun Kim, and Youngjoo Shin. "Quantitative Analysis on Attack Capacity in Meltdown-Type Attacks." International Conference on Information Security Applications. Springer, Cham, 2021.
 
 #### > KCI
-* (Running 1)
 * [[Link](http://www.kiise.or.kr/e_journal/2023/3/KTCP/KTCP/index.html#page=3)] __이석민__ , 노승일, 김태훈 and 신영주 (2023) "SMTP TLS Reporting 사용 현황에 대한 실증 연구" 정보과학회 컴퓨팅의 실제 논문지, 29(3), 107-113,2023. DOI:https://doi.org/10.5626/KTCP.2023.29.3.107.
 * [[Link](https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART002906640)] __이석민__ and 신영주, "GPUDirect RDMA 기반의 고성능 암호 분석 시스템 설계 및 구현," Journal of The Korea Institute of Information Security and Cryptology, vol. 32, no. 6, pp. 1127-1137, 2022. DOI:https://doi.org/10.13089/JKIISC.2022.32.6.1095.
 
