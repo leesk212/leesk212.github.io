@@ -6,6 +6,7 @@ tags: Coding_TEST CPP
 # 배열 초기화
 ```cpp
 #include <stdlib.h>
+#include <string.h>
 int visited[10] = { true,};
 memset(visited, false, sizeof(visited));
 ```
