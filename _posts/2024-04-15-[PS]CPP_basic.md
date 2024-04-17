@@ -36,14 +36,8 @@ int min_index = min_element(ans.begin(),ans.end()) - ans.begin();
 
 # 벡터 내 특정 값 찾기 index
 
-
-
- 
 1. find, find_if
- 
 vector에서 특정 데이터가 존재하는지 확인하고 싶다.
-
- 
 그렇다면 algorithm 라이브러리의 find를 사용할 수 있다.
 
  
@@ -52,15 +46,8 @@ find는 반복자를 인자로 갖으면서 배열, vector, deque 처럼 일련�
  
 또한, find_if를 사용하면 특정 조건에 일치하는 데이터를 탐색할 수 있다.
 
- 
-
- 
-
- 
-
- 
-
 2. 코 드
+   
 ```cpp
 #include <vector>
 #include <algorithm>
