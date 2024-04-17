@@ -93,3 +93,92 @@ int main() {
     return 0;
 }
 ```
+
+
+# 벡터 Permutation
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	string s = "1234";
+
+	do {
+		cout << s << " ";
+	} while (next_permutation(s.begin(), s.end()));
+	cout << "\n\n";
+	
+
+
+	vector<int> v = { 10, 5, 1, 2, 4 };
+	int len = v.size();
+	//sort(v.begin(), v.end());	// 정렬 후 next_permutation 사용해야함
+
+	do {
+		for (int i = 0; i < len; i++) {
+			cout << v[i] << " ";
+		}
+		cout << "\n";
+	} while (next_permutation(v.begin(), v.end()));
+
+	return 0;
+}
+```
+
+# 벡터 sort 오름차순
+
+```cpp
+#include <iostream> 
+#include <algorithm> 
+#include <vector> 
+using namespace std; 
+
+int main() {
+    vector<int> v = { 4, 7, 2, 5, 10, 8, 1, 6, 3 };
+    cout << "정렬 전: "; 
+    for (int i = 0; i < v.size(); i++) { 
+    	cout << v[i] << " "; 
+    } 
+    cout << endl; 
+    sort(v.begin(), v.end()); 
+    cout << "정렬 후: "; 
+    for (int i = 0; i < v.size(); i++) { 
+    	cout << v[i] << " "; 
+    } 
+    cout << endl; 
+    return 0; 
+}
+```
+
+# 벡터 sort 내림차순
+
+```
+#include <iostream> 
+#include <algorithm> 
+#include <vector> 
+using namespace std; 
+
+bool cmp(int a, int b) { 
+    return a > b;
+} 
+
+int main() {
+    vector<int> v = { 4, 7, 2, 5, 10, 8, 1, 6, 3 };
+    cout << "정렬 전: "; 
+    for (int i = 0; i < v.size(); i++) { 
+    	cout << v[i] << " "; 
+    } 
+    cout << endl; 
+    sort(v.begin(), v.end(), cmp); 
+    cout << "정렬 후: "; 
+    for (int i = 0; i < v.size(); i++) { 
+    	cout << v[i] << " "; 
+    } 
+    cout << endl; 
+    return 0; 
+}
+```
