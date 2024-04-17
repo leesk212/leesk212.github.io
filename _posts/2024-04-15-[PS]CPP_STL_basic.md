@@ -156,7 +156,7 @@ int main() {
 
 # 벡터 sort 내림차순
 
-```
+```cpp
 #include <iostream> 
 #include <algorithm> 
 #include <vector> 
