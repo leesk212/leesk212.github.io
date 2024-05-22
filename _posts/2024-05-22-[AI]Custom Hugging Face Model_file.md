@@ -25,3 +25,7 @@ PARAMETER stop </s>
 ```
 
 PARAMTER의 경우 HuggingFaceTextGenInference API를 참고하자 
+
+<ref : https://github.com/ollama/ollama/blob/main/docs/modelfile.md#parameter>
+
+참조
