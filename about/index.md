@@ -8,7 +8,7 @@ toc: True
 ---    
 
 <center>
-Hello, I am expected as a security developer or researcher member of Samsung SDS.
+Hello, I am a security engineer in Samsung SDS.
 </center>              
 
 
