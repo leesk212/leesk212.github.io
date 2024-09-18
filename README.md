@@ -97,9 +97,7 @@ EEG기반 PSG 데이터를 입력으로 하는 딥러닝 시스템 기반의 5�
 
 
 
-<h4> Quantitative Analysis on Attack Capacity in Meltdown-type Attacks</h4>
-
-<span class="data">2021.01 - 2021.08</span><br>
+<h4> Quantitative Analysis on Attack Capacity in Meltdown-type  </h4>
 
 <h5> Program: Undergraduate Research Student </h5>
 
