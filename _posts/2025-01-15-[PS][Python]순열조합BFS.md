@@ -46,3 +46,75 @@ print(nCr_dup)
 
 # DFS 활용 구현
 
+
+
+
+
+# BFS Sample
+
+```python
+import sys
+from collections import deque
+
+sys.stdin = open('./sample.txt')
+input = sys.stdin.readline
+
+TC = int(input())
+
+
+def find_target(start, end, value, N):
+    visited = [ 0 for _ in range(N+1) ]
+
+    queue = deque()
+    queue.append((start, value))
+
+    while queue:
+        cur,cur_value = queue.popleft()
+        if cur == end:
+            value = cur_value
+            break
+
+        for key,value in graph[cur]:
+            next_ = key
+            next_value = value
+            if visited[next_] !=0:
+                continue
+            visited[next_] = 1
+            queue.append((next_,next_value+cur_value))
+
+    if value == 0:
+        return 0
+    else:
+        return value
+
+
+for tc in range(1, TC+1):
+    N, M = map(int, input().split())
+    B = int(input())
+    answer = 0
+
+    graph = {}
+    for _ in range(M):
+        data_temp = list(map(int, input().split()))
+        if data_temp[0] not in graph:
+            graph[data_temp[0]] = [(data_temp[1],data_temp[2])]
+        else:
+            graph[data_temp[0]].append((data_temp[1],data_temp[2]))
+
+    print(graph)
+
+    # 1. Let's find bomul
+    First_result = find_target(1,B,0, N )
+
+    if First_result != 0:
+        # Let's find start
+        Second_result = find_target(B,1,0, N)
+        if Second_result != 0:
+            answer = First_result+Second_result
+
+    if answer == 0:
+        print(f'#{tc} NO')
+    else:
+        print(f'#{tc} YES {answer}')
+```
+
