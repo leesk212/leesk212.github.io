@@ -1,6 +1,6 @@
 ---
 toc: True
-tags: PS PYTHON
+tags: PS PYTHON prepare_coding_test
 ---
 
 # Python Library 활용
