@@ -46,8 +46,53 @@ print(nCr_dup)
 
 # DFS 활용 구현
 
+## 순열, 중복순열
+
+```python
+test_list = [1,2,3,4,5]
+
+N, r = 5,3
+selected = [ 0 for _ in range(5)]
+
+# 순열
+def nPr(selected, collected, cnt):
+    if cnt == r:
+        print(collected)
+        return
+    else:
+        for cur in range(0, N):
+            if selected[cur] != 0:
+                continue
+            selected[cur] = 1
+            collected.append(test_list[cur])
+            nPr(selected, collected, cnt+1)
+            collected.pop()
+            selected[cur] = 0
+
+nPr(selected,[],0)
+
+# 중복순열
+def nPr_dup(collected, cnt):
+    if cnt == r:
+        print(collected)
+        return
+    else:
+        for cur in range(0, N):
+            collected.append(test_list[cur])
+            nPr_dup(collected, cnt+1)
+            collected.pop()
+
+nPr_dup([],0)
 
 
+```
+
+## 조합, 중복조합
+
+```python
+
+
+```
 
 
 # BFS Sample
