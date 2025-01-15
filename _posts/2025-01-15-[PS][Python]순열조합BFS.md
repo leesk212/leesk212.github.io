@@ -95,22 +95,38 @@ test_list = [1,2,3,4,5]
 N, r = 5,3
 selected = [ 0 for _ in range(5)]
 
-# 조합
+# 조합 -> 순서를 뽑는 느낌
 def nCr(selected, cnt, idx):
     if cnt == r:
-        for i in selected:
+        for i in range(len(selected)):
             if selected[i] == 1:
                 print(test_list[i], end=' ')
+        print()
         return
     else:
         for cur in range(idx, N):
             if selected[cur] != 0:
                 continue
             selected[cur] = 1
-            nCr(selected,  cnt+1, id)
+            nCr(selected,  cnt+1, cur)
             selected[cur] = 0
 
-nCr(selected,0,0)
+#nCr(selected,0,0)
+
+# 중복조합 -> 순서를 뽑는 느낌이 아니라, 값을 뽑는 느낌.
+def nCr_dup(colletcted, cnt, idx):
+    if cnt == r:
+        print(colletcted)
+        return
+    else:
+        for cur in range(idx, N):
+            colletcted.append(test_list[cur])
+            nCr_dup(colletcted, cnt+1, cur)
+            colletcted.pop()
+
+nCr_dup([],0, 0)
+
+
 
 ```
 
