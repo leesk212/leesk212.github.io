@@ -3,7 +3,22 @@ toc: True
 tags: PS PYTHON prepare_coding_test
 ---
 
-# 2차원 배열 입력 받기
+# 입력
+
+## 기본 입력 받기
+
+```python
+import sys
+
+sys.stdin = open('sample.txt')
+
+input = sys.stdin.readline
+
+N, M = map(int, input().split())
+
+```
+
+## 2차원 배열 입력 받기
 
 ```python
 arr=[]
