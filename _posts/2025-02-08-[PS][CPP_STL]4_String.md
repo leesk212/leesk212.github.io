@@ -215,6 +215,7 @@ if (pos != string::npos) {
     cout << sub << endl;  // 출력: World!
 }
 ```
+![image 4](https://github.com/user-attachments/assets/70287bc9-fd8d-4aa0-8c77-796144386348)
 
 
 
