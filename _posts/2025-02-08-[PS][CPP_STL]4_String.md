@@ -215,8 +215,6 @@ if (pos != string::npos) {
     cout << sub << endl;  // 출력: World!
 }
 ```
-![image 4](https://github.com/user-attachments/assets/70287bc9-fd8d-4aa0-8c77-796144386348)
-
 
 
 map 이랑 set 내에 struct 자료형 활용하면서 Index tree같은 테크닉도 필요할 경우 있음
