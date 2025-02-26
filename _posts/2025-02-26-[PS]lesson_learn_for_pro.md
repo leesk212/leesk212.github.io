@@ -11,10 +11,52 @@
   나는 pq에 넣기 직전에 넣는게 원론적으로 이해가 빠르다.
   뭔가 다음 갈 노드 queue에 넣기전에, 방문했으면 안넣는 느낌
 
-> 3. 다익에 pq를 써야할까?
+```cpp
+while (!pq.empty()) {
+	int cur_dist = pq.top().first;
+	int cur_node = pq.top().second;
+	pq.pop();
+
+	if (cur_node == end) { //도착
+		dist = dists[end];
+		break;
+	}
+
+	for (int next_node = 1; next_node < total_gate_cnt + 1; next_node++) {
+		int next_dist = gate_graph[cur_node][next_node];
+
+		if (next_dist == 0 || next_dist == 9999999) {
+			continue;
+		}
+		if (gates[next_node].enable == 0) {
+			continue;
+		}
+
+		if (dists[next_node] > dists[cur_node] + next_dist) {
+			dists[next_node] = dists[cur_node] + next_dist;
+
+			if (visited[next_node] != 0) {
+				continue;
+			}
+			visited[next_node] = 1;
+			pq.push({ dists[next_node], next_node });
+		}
+
+	}
+}
+```
+
+
+
+> 3. 다익에 pq를 써야할까? 찾는 노드에 도착하면 바로 종료해도될까?
 
 * pq로 구현을 안할 수도 있다. 왜냐하면 pq는 하나의 옵션 기능인 느낌이다ㅣ.
 * 다익(by pq)를 진행하게되면, 한 점에서 최소 비용으로 다음 노드를 찾아가는게 보장되는 것이다.
+* 따라서 찾고자 하는 노드에 도착하게되면 바로 종료시켜도된다.
+
+```cpp
+priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+```
 
 > 4. 다익을 쓸때 dist 백터
 
