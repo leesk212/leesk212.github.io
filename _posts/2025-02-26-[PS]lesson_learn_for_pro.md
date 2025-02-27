@@ -6,6 +6,9 @@
 
 > 2. 다익에 visited 함수를 넣고 말고 하는것
 
+![dijkstra_slower(1)](https://github.com/user-attachments/assets/b4b1eb21-321b-48d6-83a7-18db13300851)
+
+
 * 넣는게 훨씬 빠르다.(안넣어도 된다는건 chatGPT의 할루시..)
   다만 어떻게 넣는가에 대해서는 문제마다 다르지만,
   나는 pq에 넣기 직전에 넣는게 원론적으로 이해가 빠르다.
