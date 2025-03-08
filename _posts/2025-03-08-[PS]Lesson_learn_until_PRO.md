@@ -123,8 +123,9 @@ while (!pq.empty()) {
 * 지금 생각해보면 당연하지만, ACM_CRAFT 문제 풀때는 될거라고 생각하고 계속 디버깅했다..
 * 다익은 최소거리를 보장시켜서만 갈 수 있다. (왜냐면 음수가 안되기 떄문에)
 * 그럼 최장거리 보장하면서 갈 수 있는 방법은 어떤 것이 있을까?
-  1. 다익+DAG(위상정렬) --> ACM Craft
-     * 핵심은 위상정렬을 활용하여, 진입차수가 0인 것들을 미리 queue에 넣어놓는 다는 것이다.
+
+1. 다익+DAG(위상정렬) --> ACM Craft
+   * 핵심은 위상정렬을 활용하여, 진입차수가 0인 것들을 미리 queue에 넣어놓는 다는 것이다.
 
         	
 <details>
@@ -207,11 +208,11 @@ while (!pq.empty()) {
 </details>
 
 
-  2. 벨만포드 알고리즘
-	* 음수 가중치 가능
+2. 벨만포드 알고리즘
+   * 음수 가중치 가능
 	
-	<details>
- 	<summary> 코드 </summary>
+<details>
+<summary> 코드 </summary>
 
 	```cpp
 	#include <iostream>
@@ -268,7 +269,7 @@ while (!pq.empty()) {
 
  	```
  
-	</details>
+</details>
 
 
 
