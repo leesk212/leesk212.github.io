@@ -1,9 +1,28 @@
 # 프로까지 고정(3try)
 - 1차 : 다익스트라 
 - 2차 : 뭔 깡구현 ??? (도로길 병합)
-- 3차 : STL 활용 깡구현 (인기 검색어)
+- 3차 : STL 활용 깡구현 (인기 검색어)		 	 
 
 ---
+
+
+## 시험
+
+> 1. 1차시험 리뷰 (1시간 문제 해석)
+* 다익을 구현할 줄 몰라서, DFS->최단거리로 접근했다.
+* 문제는 최단거리로 접근을 하고서는 구현하는데 시간이 부족했다.(정확히는 구현할 능력이 없었다.)
+* 다시 문제가 올라와있으니, 다시 풀어보자 (이제는 다익 구현할줄암)
+
+> 2. 2차시험 리뷰 (30분 문제 해석)
+* 메모리 오버가 났다.
+* 1초에 약 1억번 돈다는 가정을 몰랐고, 15000 by 15000의 크기의 공간은 매번 터진다.
+* 이걸모르고 전체를 BFS 돌릴려고 하였으니, 꼭 메모리가 터질지 & 시간 내에 들어올 수 있을지 계산을 하자
+
+> 3. 3차시험 리뷰 (50분 문제 해석)
+* 그룹핑 문제였기에, 최대한 알고리즘을 다짜고 들어갔으나, 결국 처음 단추를 또 잘못꼈다.
+* map으로 string을 키로 주게되면 가장 첫번째 string 값들에 디펜던시가 걸린다.
+* HammingDistance를 찾는 느낌이어는데, 그걸 놓쳤다. 
+
 
 ## 알고리즘
 
@@ -237,9 +256,155 @@ while (!pq.empty()) {
 
 ## 구현
 
-# 시험
+> 1. string to char / char to string
 
-> 1. 시험장의 컴파일러
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    string str = "Hello, World!";
+    const char* cstr = str.c_str();
+    string str2(cstr);
+}
+```
+
+> 2. string find
+
+* 인자 값은, (찾으려는 문자, 찾기 시작할 위치) 이다.
+* 반환값은, 찾기 시작할 위치부터 검색하려는 문자가 처음 나온 위치이다.
+* 함수 원형
+```cpp
+size_t find(const std::string& str, size_t pos = 0) const;
+size_t find(const char* s, size_t pos = 0) const;
+size_t find(const char* s, size_t pos, size_t count) const;
+size_t find(char c, size_t pos = 0) const;
+```
+
+* 사용
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    string str = "Hello, World!";
+
+    // 1. 문자열 찾기
+    size_t pos1 = str.find("World");
+    if (pos1 != string::npos)
+        cout << "'World' found at index: " << pos1 << endl;
+
+    // 2. 문자 찾기
+    size_t pos2 = str.find('o');
+    if (pos2 != string::npos)
+        cout << "'o' found at index: " << pos2 << endl;
+
+    // 3. 특정 위치부터 찾기
+    size_t pos3 = str.find("o", pos2 + 1);
+    if (pos3 != string::npos)
+        cout << "'o' found again at index: " << pos3 << endl;
+
+    // 4. 찾을 수 없는 경우
+    size_t pos4 = str.find("XYZ");
+    if (pos4 == string::npos)
+        cout << "'XYZ' not found" << endl;
+
+    return 0;
+}
+
+```
+
+
+> 3. string substring
+
+* 인자 값은, (시작 위치, 몇 개까지 자를지) 이다.
+* 반환값은, 잘린 string이다.
+* 함수 원형
+
+```cpp
+std::string substr(size_t pos = 0, size_t len = npos) const;
+```
+
+* 사용
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main() {
+    string str = "Hello, World!";
+
+    // 1. 특정 위치부터 끝까지 부분 문자열 추출
+    string sub1 = str.substr(7);
+    cout << "Substring from index 7: " << sub1 << endl; // World!
+
+    // 2. 특정 길이만큼 추출
+    string sub2 = str.substr(0, 5);
+    cout << "First 5 characters: " << sub2 << endl; // Hello
+
+    // 3. `find()`와 함께 사용하여 특정 단어 추출
+    size_t pos = str.find("World");
+    if (pos != string::npos) {
+        string sub3 = str.substr(pos, 5);
+        cout << "Extracted word: " << sub3 << endl; // World
+    }
+
+    return 0;
+}
+
+```
+
+> 4. find, substring으로 c++에서 파싱
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+// CSV 문자열을 파싱하는 함수
+vector<string> parseCSV(const string& csvLine) {
+    vector<string> result;
+    size_t start = 0, end;
+
+    while ((end = csvLine.find(',', start)) != string::npos) {
+        result.push_back(csvLine.substr(start, end - start));
+        start = end + 1; // 다음 문자로 이동
+    }
+
+    // 마지막 필드 추가
+    result.push_back(csvLine.substr(start));
+
+    return result;
+}
+
+int main() {
+    string csvData = "Apple,Banana,Cherry,Date";
+
+    vector<string> parsed = parseCSV(csvData);
+
+    cout << "Parsed CSV values:" << endl;
+    for (size_t i = 0; i < parsed.size(); i++) {
+        cout << parsed[i] << endl;
+    }
+
+    return 0;
+}
+
+
+```
+
+## 기타
+
+> 1. 구조체의 에러라면?
 
 * 다행히 구조체를 생성할때 생성자를 안적어도되지만, 만약 비슷한 에러가 뜬다면 되는것들은 페어로 처리하자
 
