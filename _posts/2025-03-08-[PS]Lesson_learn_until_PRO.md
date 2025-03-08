@@ -127,11 +127,6 @@ while (!pq.empty()) {
 1. 다익+DAG(위상정렬) --> ACM Craft
    * 핵심은 위상정렬을 활용하여, 진입차수가 0인 것들을 미리 queue에 넣어놓는 다는 것이다.
 
-        	
-<details>
-<summary> 코드 </summary>
-
-
 ```cpp
 #include <iostream>
 #include <vector>
@@ -205,14 +200,9 @@ int main() {
 
 ```
  
-</details>
-
 
 2. 벨만포드 알고리즘
    * 음수 가중치 가능
-	
-<details>
-<summary> 코드 </summary>
 
 ```cpp
 #include <iostream>
@@ -268,10 +258,6 @@ int main() {
 }
 
 ```
- 
-</details>
-
-
 
 
 
