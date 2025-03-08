@@ -89,7 +89,7 @@ while (!pq.empty()) {
      * 핵심은 위상정렬을 활용하여, 진입차수가 0인 것들을 미리 queue에 넣어놓는 다는 것이다.
 
         	
-	<detail>
+	<details>
  	<summary> 코드 </summary>
 		
 	```cpp
@@ -165,13 +165,13 @@ while (!pq.empty()) {
 	
  	```
  
-  	</detail>
+  	</details>
 
 
   2. 벨만포드 알고리즘
 	* 음수 가중치 가능
 	
-	<detail>
+	<details>
  	<summary> 코드 </summary>
 
 	```cpp
@@ -229,7 +229,7 @@ while (!pq.empty()) {
 
  	```
  
-	</detail>
+	</details>
 
 
 
